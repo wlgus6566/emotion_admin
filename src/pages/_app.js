@@ -4,7 +4,9 @@ export default function App({ Component, pageProps }) {
   return (
       <div className="flex h-screen">
         <AppSidebar/>
-        <Component {...pageProps} />
+          <div className="p-16 flex-1">
+              <Component {...pageProps} />
+          </div>
       </div>
   )
 }
