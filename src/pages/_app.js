@@ -1,12 +1,20 @@
 import '@/styles/globals.css'
-import AppSidebar from "@/components/app-sidebar";
+import DefaultsLayout from "@/layouts/defaults";
+import Head from "next/head";
 export default function App({ Component, pageProps }) {
+    const Layout = Component.layout || (({ children }) => <>{children}</>);
+
   return (
-      <div className="flex h-screen">
-        <AppSidebar/>
-          <div className="p-16 flex-1">
+      <>
+          <Head>
+              <meta charSet="utf-8" />
+              <meta name="description" content="이모션글로벌 관리자 사이트입니다." />
+              <title>emotion global admin</title>
+          </Head>
+          <Layout>
               <Component {...pageProps} />
-          </div>
-      </div>
+          </Layout>
+      </>
+
   )
 }

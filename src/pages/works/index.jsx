@@ -1,3 +1,4 @@
+import DefaultsLayout from "@/layouts/defaults";
 export default function Works() {
     return (
         <div>
@@ -11,3 +12,5 @@ export default function Works() {
         </div>
     );
 }
+
+Works.layout = DefaultsLayout;
