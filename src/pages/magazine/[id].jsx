@@ -3,15 +3,20 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import DefaultsLayout from "@/layouts/defaults";
 import Magazine from "@/pages/magazine/index";
+import PageTitle from "@/components/global/page-title";
+import InputSearch from "@/components/global/input-search";
+import PaginationItem from "@/components/global/pagination-item";
 
 export default function MagazineDetail({data}) {
     const router = useRouter();
     console.log(router)
     return (
-        <div style={{ textAlign: "center" }}>
-            sdsdsdsdsd
-            <h2>{data.title}</h2>
-       {/*     <Image src={photo.url} alt={photo.title} width={500} height={500} />*/}
+        <div>
+            <PageTitle title="Magazine 관리상세"/>
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-8 bg-white">
+               ㄴㅇㄹㅇㄴㄹㄴㅇ
+            </div>
+            <PaginationItem/>
         </div>
     );
 }
