@@ -1,8 +1,9 @@
 import DefaultsLayout from "@/layouts/defaults";
+import PageTitle from "@/components/global/page-title";
 export default function Works() {
     return (
         <div>
-            <p className="text-gray-700 text-3xl mb-16 font-bold">Works</p>
+            <PageTitle title="Works 관리"/>
             <div className="grid lg:grid-cols-3 gap-5 mb-16">
                 <div className="rounded bg-white h-40 shadow-sm"></div>
                 <div className="rounded bg-white h-40 shadow-sm"></div>
