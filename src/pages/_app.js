@@ -1,6 +1,8 @@
 import '@/styles/globals.css'
-import DefaultsLayout from "@/layouts/defaults";
 import Head from "next/head";
+import '@fortawesome/fontawesome-svg-core/styles.css'
+import { config } from '@fortawesome/fontawesome-svg-core'
+config.autoAddCss = false
 export default function App({ Component, pageProps }) {
     const Layout = Component.layout || (({ children }) => <>{children}</>);
 

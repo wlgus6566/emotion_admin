@@ -3,6 +3,7 @@ import PaginationItem from "@/components/global/pagination-item";
 import PageTitle from "@/components/global/page-title";
 import InputSearch from "@/components/global/input-search";
 import Link from "next/link";
+import Button from "@/components/global/button";
 
 export default function Magazine({datas}) {
     return (
@@ -61,7 +62,11 @@ export default function Magazine({datas}) {
                     </tbody>
                 </table>
             </div>
+            <div className="flex justify-end mt-6 space-x-2">
+                <Button/>
+            </div>
             <PaginationItem/>
+
         </div>
     );
 }

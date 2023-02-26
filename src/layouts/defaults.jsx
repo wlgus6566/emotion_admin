@@ -5,7 +5,7 @@ export default function DefaultsLayout({ children }) {
         <div className="flex h-screen">
             <AppHeader/>
             <AppSidebar/>
-            <div className="p-16 flex-1">
+            <div className="p-16 flex-1 bg-gradient">
                 { children }
             </div>
         </div>

@@ -1,6 +1,7 @@
 import {useRouter} from "next/router";
 import Link from "next/link";
-
+import { faTv, faBookOpen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function AppSidebar() {
     const router = useRouter()
     return (
@@ -15,7 +16,7 @@ export default function AppSidebar() {
                 </picture>
             </div>
             <div className="flex flex-col">
-                <Link href="/">
+        {/*        <Link href="/">
                     <div
                         className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
                             router.pathname == "/"
@@ -24,23 +25,23 @@ export default function AppSidebar() {
                         }`}
                     >
                         <div className="mr-2">
-                            {/*               <HomeIcon className="h-5 w-5" />*/}
+                            { <FontAwesomeIcon icon={faTv} />}
                         </div>
                         <div>
                             <p>Home</p>
                         </div>
                     </div>
-                </Link>
+                </Link>*/}
                 <Link href="/works">
                     <div
                         className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-                            router.pathname == "/works"
+                            router.pathname.includes("/works")
                                 ? "bg-orange-100 text-orange-500"
                                 : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
                         }`}
                     >
                         <div className="mr-2">
-                            {/*      <UserIcon className="h-5 w-5" />*/}
+                            { <FontAwesomeIcon icon={faTv} />}
                         </div>
                         <div>
                             <p>Works</p>
@@ -50,16 +51,16 @@ export default function AppSidebar() {
                 <Link href="/magazine">
                     <div
                         className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-                            router.pathname == "/magazine"
+                            router.pathname.includes("/magazine") 
                                 ? "bg-orange-100 text-orange-500"
                                 : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
                         }`}
                     >
                         <div className="mr-2">
-                            {/*    <CreditCardIcon className="h-5 w-5" />*/}
+                            {<FontAwesomeIcon icon={faBookOpen} />}
                         </div>
                         <div>
-                            <p>Magazine</p>
+                            <p>MAGAZINE</p>
                         </div>
                     </div>
                 </Link>
