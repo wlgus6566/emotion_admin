@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 import DefaultsLayout from "@/layouts/defaults";
 import PageTitle from "@/components/global/page-title";
-import InputText from "@/components/global/input-text";
+import FormInput from "@/components/global/form-input";
+import FormTextarea from "@/components/global/form-textarea";
+import FormDatePicker from "@/components/global/form-date";
 
 export default function MagazineDetail({data}) {
     const router = useRouter();
@@ -11,9 +13,22 @@ export default function MagazineDetail({data}) {
             <PageTitle title="Magazine 관리"/>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-8 bg-white">
                 <form>
+                    <div className="mb-6">
+                        <FormInput name="pc_title" autoFocus={true} label="PC 제목"/>
+                    </div>
+                    <div className="mb-6">
+                        <FormInput name="mo_title" autoFocus={true} label="MO 제목"/>
+                    </div>
+                    <div className="mb-6">
+                        <FormTextarea name="desc" autoFocus={true} label="설명"/>
+                    </div>
+                    <div className="mb-6">
+                        <FormTextarea name="desc" rows="20" autoFocus={true} label="본문"/>
+                    </div>
                     <div className="grid gap-6 mb-6 md:grid-cols-2">
-                        <InputText/>
-                        <div>
+                        <FormInput name="department" autoFocus={true} label="작성자 부서명"/>
+                        <FormDatePicker/>
+                        {/*    <div>
                             <label htmlFor="last_name"
                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
                                 name</label>
@@ -51,7 +66,7 @@ export default function MagazineDetail({data}) {
                             <input type="number" id="visitors"
                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                    placeholder="" required/>
-                        </div>
+                        </div>*/}
                     </div>
                     <div className="mb-6">
                         <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email
