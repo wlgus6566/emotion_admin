@@ -3,7 +3,7 @@ import DefaultsLayout from "@/layouts/defaults";
 import PageTitle from "@/components/global/page-title";
 import FormInput from "@/components/global/form-input";
 import FormTextarea from "@/components/global/form-textarea";
-import FormDatePicker from "@/components/global/form-date";
+/*import FormDatePicker from "@/components/global/form-date";*/
 
 export default function MagazineDetail({data}) {
     const router = useRouter();
@@ -27,7 +27,7 @@ export default function MagazineDetail({data}) {
                     </div>
                     <div className="grid gap-6 mb-6 md:grid-cols-2">
                         <FormInput name="department" autoFocus={true} label="작성자 부서명"/>
-                        <FormDatePicker/>
+                    {/*    <FormDatePicker/>*/}
                         {/*    <div>
                             <label htmlFor="last_name"
                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last
