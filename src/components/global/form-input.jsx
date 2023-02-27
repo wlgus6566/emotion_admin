@@ -37,29 +37,14 @@ class FormInput extends PureComponent {
         // 상위 컴포넌트 콜백 함수 실행
         onChange(name, e.target.value);
     }
-
-    // 입력창에 포커스
     handleFocus(e) {
         const { name, onFocus } = this.props;
-        console.log(
-            `handleFocus() name : ${name} , e.target.value : ${e.target.value}`
-        );
-
-        // 처음 포커스시
         if (this.state.isFirstFocus === false) {
-            console.log(
-                `First on focus -> name : ${name} , e.target.value : ${e.target.value}`
-            );
             this.setState({ isFirstFocus: true });
         }
-
-        // 상위 컴포넌트 콜백 함수 실행
         onFocus(name, e.target.value);
     }
-
-    // 컴포넌트 마운트
     componentDidMount() {
-        // 포커스 맞추기
         if (this.props.autoFocus) {
             this.ref.focus();
         }
@@ -67,7 +52,7 @@ class FormInput extends PureComponent {
 
     render() {
         // 프로퍼티 받아서 화면 출력
-        const { label, name, type, errorMessage,disabled } = this.props;
+        const { label, name, type, errorMessage,disabled,placeholder } = this.props;
         return (
             <div>
                 <label htmlFor={`input_${name}`}
@@ -81,6 +66,7 @@ class FormInput extends PureComponent {
                     onChange={this.handleChange}
                     onFocus={this.handleFocus}
                     disabled={disabled}
+                    placeholder={placeholder}
                 />
                 {this.state.isInputError && errorMessage}
             </div>
@@ -93,7 +79,8 @@ FormInput.propTypes = {
     name: PropTypes.string.isRequired,
     disabled: PropTypes.bool,
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    type: PropTypes.oneOf(["text", "password", "number", "price"]),
+    placeholder: PropTypes.string,
+    type: PropTypes.oneOf(["text", "password", "number"]),
     autoFocus: PropTypes.bool,
     errorMessage: PropTypes.string,
     onChange: PropTypes.func,
@@ -104,7 +91,7 @@ FormInput.defaultProps = {
     value: "",
     type: "text",
     disabled: false,
-    autoFocus: false,
+    autoFocus: true,
     onChange: () => {},
     onFocus: () => {},
 };

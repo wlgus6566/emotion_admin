@@ -15,59 +15,33 @@ class FormTextarea extends PureComponent {
         this.handleChange = this.handleChange.bind(this);
         this.handleFocus = this.handleFocus.bind(this);
     }
-
-    // ref 프로퍼티 연결
     setRef(ref) {
         this.ref = ref;
     }
-
-    // 입력창 변경 이벤트
     handleChange(e) {
         const { name, onChange } = this.props;
-        console.log(
-            `handleChange() name : ${name} , e.target.value : ${e.target.value}`
-        );
-
-        // 에러 체크 변수
         let checkError = false;
-
-        // 변경된 스테이트 값
         this.setState({ isInputError: checkError, value: e.target.value });
 
         // 상위 컴포넌트 콜백 함수 실행
         onChange(name, e.target.value);
     }
 
-    // 입력창에 포커스
     handleFocus(e) {
         const { name, onFocus } = this.props;
-        console.log(
-            `handleFocus() name : ${name} , e.target.value : ${e.target.value}`
-        );
-
-        // 처음 포커스시
         if (this.state.isFirstFocus === false) {
-            console.log(
-                `First on focus -> name : ${name} , e.target.value : ${e.target.value}`
-            );
             this.setState({ isFirstFocus: true });
         }
-
         // 상위 컴포넌트 콜백 함수 실행
         onFocus(name, e.target.value);
     }
-
-    // 컴포넌트 마운트
     componentDidMount() {
-        // 포커스 맞추기
         if (this.props.autoFocus) {
             this.ref.focus();
         }
     }
-
     render() {
-        // 프로퍼티 받아서 화면 출력
-        const { label, name, errorMessage,disabled, rows } = this.props;
+        const { label, name, errorMessage,disabled, rows,placeholder } = this.props;
         return (
             <div>
                 <label htmlFor={`input_${name}`}
@@ -81,6 +55,7 @@ class FormTextarea extends PureComponent {
                     onFocus={this.handleFocus}
                     disabled={disabled}
                     rows={rows}
+                    placeholder={placeholder}
                 />
                 {this.state.isInputError && errorMessage}
             </div>
@@ -98,6 +73,7 @@ FormTextarea.propTypes = {
     errorMessage: PropTypes.string,
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
+    placeholder: PropTypes.string,
 };
 
 FormTextarea.defaultProps = {
