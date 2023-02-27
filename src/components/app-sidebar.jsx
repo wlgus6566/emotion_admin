@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function AppSidebar() {
     const router = useRouter()
     return (
-        <div className="fixed w-56 h-full bg-white shadow-sm">
+        <div className="fixed w-56 h-full shadow-sm font-family-karla bg-primary z-20">
             <div className="flex justify-center my-14">
                 <picture>
                     <img
@@ -18,52 +18,64 @@ export default function AppSidebar() {
             <div className="flex flex-col">
             <Link href="/">
                     <div
-                        className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+                        className={`text-lg pl-10 py-6 rounded text-center cursor-pointer flex items-center transition-colors ${
                             router.pathname == "/"
-                                ? "bg-orange-100 text-orange-500"
-                                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+                                ? "bg-red-700 text-white font-bold"
+                                : "text-white hover:bg-red-600"
                         }`}
                     >
-                        <div className="mr-2">
+                        <div className="mr-3">
                             { <FontAwesomeIcon icon={faHome} />}
                         </div>
                         <div>
-                            <p>HOME</p>
+                            <p>Home</p>
                         </div>
                     </div>
                 </Link>
                 <Link href="/works">
                     <div
-                        className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
+                        className={`text-lg pl-10 py-6 rounded text-center cursor-pointer flex items-center transition-colors ${
                             router.pathname.includes("/works")
-                                ? "bg-orange-100 text-orange-500"
-                                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+                                ? "bg-red-700 text-white font-bold"
+                                : "text-white hover:bg-red-600"
                         }`}
                     >
-                        <div className="mr-2">
+                        <div className="mr-3">
                             { <FontAwesomeIcon icon={faTv} />}
                         </div>
                         <div>
-                            <p>WORKS</p>
+                            <p>Works</p>
                         </div>
                     </div>
                 </Link>
                 <Link href="/magazine">
                     <div
-                        className={`pl-6 py-3 mx-5 rounded text-center cursor-pointer mb-3 flex items-center transition-colors ${
-                            router.pathname.includes("/magazine") 
-                                ? "bg-orange-100 text-orange-500"
-                                : "text-gray-400 hover:bg-orange-100 hover:text-orange-500"
+                        className={`text-lg pl-10 py-6 rounded text-center cursor-pointer flex items-center transition-colors ${
+                            router.pathname.includes("/magazine")
+                                ? "bg-red-700 text-white font-bold"
+                                : "text-white hover:bg-red-600"
                         }`}
                     >
-                        <div className="mr-2">
+                        <div className="mr-3">
                             {<FontAwesomeIcon icon={faBookOpen} />}
                         </div>
                         <div>
-                            <p>MAGAZINE</p>
+                            <p>Magazine</p>
                         </div>
                     </div>
                 </Link>
+                <div className="absolute left-0 bottom-6 w-100">
+                    <div className="flex w-100 flex-col items-center justify-center">
+                        <img
+                            className="w-3/12 h-auto"
+                            src="/nav_logo.png"
+                            alt="company logo"
+                        />
+                        <p className="mt-6 text-white font-bold">MAKE · GREATNESS</p>
+                        <p className="mt-2 text-neutral-300 text-sm">위대함을 만들어 갑니다. </p>
+                    </div>
+
+                </div>
             </div>
         </div>
     )
