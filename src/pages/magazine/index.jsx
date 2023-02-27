@@ -63,7 +63,7 @@ export default function Magazine({datas}) {
                 </table>
             </div>
             <div className="flex justify-end mt-6 space-x-2">
-                <Button/>
+                <Button name="글 쓰기"/>
             </div>
             <PaginationItem/>
 

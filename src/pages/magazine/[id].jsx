@@ -4,6 +4,8 @@ import PageTitle from "@/components/global/page-title";
 import FormInput from "@/components/global/form-input";
 import FormTextarea from "@/components/global/form-textarea";
 import FormDatepicker from "@/components/global/form-datepicker";
+import FormFile from "@/components/global/form-file";
+import Button from "@/components/global/button";
 
 export default function MagazineDetail({data}) {
     return (
@@ -55,29 +57,26 @@ export default function MagazineDetail({data}) {
                                placeholder="•••••••••" required/>
                     </div>*/}
                     <div className="mb-6">
-                        <label className="block">
-                            <label htmlFor="a"
-                                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">KV PC BIG 이미지 * </label>
-                            <input type="file" id="a" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
-                                                          file:mr-4 file:py-2 file:px-4
-                                                          file:rounded-md file:border-0
-                                                          file:text-sm file:font-semibold
-                                                          file:bg-blue-500 file:text-white
-                                                          hover:file:bg-blue-600
-    "/>
-                        </label>
+                        <FormFile label="PC 목록 썸네일 이미지 *"/>
                     </div>
-                    <div className="flex items-start mb-6">
-                        <div className="flex items-center h-5">
-                            <input id="remember" type="checkbox" value=""
-                                   className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
-                                   required/>
-                        </div>
-                        <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I
-                            agree with the <a href="#" className="text-blue-600 hover:underline dark:text-blue-500">terms
-                                and conditions</a>.</label>
+                    <div className="mb-6">
+                        <FormFile label="MO 목록 썸네일 이미지 *"/>
                     </div>
-
+                    <div className="mb-6">
+                        <FormFile label="PC 본문 이미지 *"/>
+                    </div>
+                    <div className="mb-6">
+                        <FormFile label="MO 본문 이미지 *"/>
+                    </div>
+                    <div className="mb-6">
+                        <FormFile label="PC 작성자 이미지 *"/>
+                    </div>
+                    <div className="mb-6">
+                        <FormFile label="MO 작성자 이미지 *"/>
+                    </div>
+                    <div className="flex justify-end mt-6 space-x-2">
+                        <Button name="업로드 하기"/>
+                    </div>
                 </form>
 
             </div>
