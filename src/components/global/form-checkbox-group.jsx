@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function FormCheckboxGroup (props) {
     const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
@@ -43,9 +43,12 @@ export default function FormCheckboxGroup (props) {
 
     return (
         <div>
-            <ul className="items-center w-full text-sm font-medium text-gray-900 bg-white rounded-lg border border-gray-200 sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+            <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {props.label} <span className="text-primary ml-1">*</span>
+            </label>
+            <ul className="grid grid-cols-5 gap-x-4 w-full text-sm font-medium text-gray-900 border rounded-lg">
                 {props.checkboxes.map((checkbox) => (
-                    <li key={checkbox.value} className="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+                    <li key={checkbox.value} className="w-full">
                         <Checkbox
                             key={checkbox.value}
                             label={checkbox.label}
@@ -53,7 +56,6 @@ export default function FormCheckboxGroup (props) {
                             onChange={handleCheckboxChange}
                         />
                     </li>
-
                 ))}
             </ul>
         </div>

@@ -14,9 +14,16 @@ export default function MagazineDetail() {
         setSelectedOptions(newSelectedOptions);
     }
     const options = [
-        { label: 'Option 1', value: 'option1' },
-        { label: 'Option 2', value: 'option2' },
-        { label: 'Option 3', value: 'option3' },
+        { label: '웨어러블', value: 'option1' },
+        { label: '모바일 앱', value: 'option2' },
+        { label: '모바일 웹', value: 'option3' },
+        { label: 'PC 웹', value: 'option4' },
+        { label: '유지/운영', value: 'option5' },
+        { label: '리뉴얼', value: 'option6' },
+        { label: '신규구축', value: 'option7' },
+        { label: '컨설팅', value: 'option8' },
+        { label: '태블릿 앱', value: 'option9' },
+        { label: '기타', value: 'option10' },
     ];
     return (
         <div>
@@ -42,14 +49,14 @@ export default function MagazineDetail() {
                             <div className="mb-6">
                                 <FormCheckboxGroup
                                     checkboxes={options}
+                                    label="프로젝트 타입"
                                     onChange={handleCheckboxGroupChange}
                                 />
-                                <p>Selected options: {selectedOptions.join(', ')}</p>
+                                {/*<p>Selected options: {selectedOptions.join(', ')}</p>*/}
                             </div>
                         </div>
 
                     </div>
-
                     <div className="mb-6">
                         <FormInput name="pc_title" placeholder="PC 제목을 입력하세요." label="PC 제목"/>
                     </div>
