@@ -10,7 +10,10 @@ export default function FormDatepicker({ label, name, placeholderText } ) {
     return (
         <div className="relative">
             <label htmlFor={`datepicker_${name}`}
-                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label}</label>
+                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                {label}
+                <span className="text-primary ml-1">*</span>
+            </label>
             <DatePicker
                 locale="ko"
                 selected={startDate}

@@ -28,7 +28,7 @@ export default function AppSidebar() {
                             { <FontAwesomeIcon icon={faHome} />}
                         </div>
                         <div>
-                            <p>Home</p>
+                            <p>HOME</p>
                         </div>
                     </div>
                 </Link>
@@ -44,7 +44,7 @@ export default function AppSidebar() {
                             { <FontAwesomeIcon icon={faTv} />}
                         </div>
                         <div>
-                            <p>Works</p>
+                            <p>WORKS</p>
                         </div>
                     </div>
                 </Link>
