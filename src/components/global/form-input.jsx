@@ -15,7 +15,6 @@ const FormInput = ({
                    }) => {
     const [inputValue, setInputValue] = useState(value);
     const [isInputError, setIsInputError] = useState(false);
-    const [isFirstFocus, setIsFirstFocus] = useState(false);
 
     const handleChange = (e,name) => {
         let checkError = false;
@@ -25,10 +24,7 @@ const FormInput = ({
     };
 
     const handleFocus = (e,name) => {
-        if (!isFirstFocus) {
-            setIsFirstFocus(true);
-        }
-        onFocus(name, e.target.value);
+        onFocus(e.target.value, name);
     };
 
     return (
@@ -66,5 +62,15 @@ FormInput.propTypes = {
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
 };
+
+FormInput.defaultProps = {
+    value: "",
+    type: "text",
+    disabled: false,
+    autoFocus: false,
+    onChange: null,
+    onFocus: null,
+};
+
 
 export default FormInput;

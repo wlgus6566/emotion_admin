@@ -52,11 +52,11 @@ export default function MagazineDetail() {
                             </div>
                             <div className="grid gap-6 mb-6 grid-cols-[3fr,1fr]">
                                 <FormInput name="project_title" placeholder="프로젝트명" label="프로젝트명"/>
-                                <FormInput name="project_title" placeholder="클라이언트명" label="클라이언트명"/>
+                                <FormInput name="client_title" placeholder="클라이언트명" label="클라이언트명"/>
                             </div>
                             <div className="grid gap-6 mb-6 md:grid-cols-2">
-                                <FormInput name="project_title" placeholder="목록폰트색상" label="목록폰트색상"/>
-                                <FormInput name="project_title" placeholder="상세폰트색상" label="상세폰트색상"/>
+                                <FormInput name="font_color" placeholder="목록폰트색상" label="목록폰트색상"/>
+                                <FormInput name="detail_font_color" placeholder="상세폰트색상" label="상세폰트색상"/>
                             </div>
 
                             <div className="mb-6">

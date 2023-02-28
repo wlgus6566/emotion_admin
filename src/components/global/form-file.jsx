@@ -1,63 +1,82 @@
-import {useState} from 'react'
+import { useState, useRef } from "react";
+import PropTypes from "prop-types";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
+export default function FormFile(
+    {
+        label,
+        max,
+        multiple
+    }
+) {
+    const inputRef = useRef(null);
+    const [files, setFiles] = useState([]);
 
-export default function FormFile({label}) {
-    const [files, setFiles] = useState(null)
-    const [showImages, setShowImages] = useState([])
-    const handleUpload = async (event) => {
-        if (event.target.files) {
-            setFiles(event.target.files[0])
+    const handleChange = (e) => {
+        setFiles(Array.from(e.target.files || []));
+    };
+
+    const handleDelete = (index) => {
+        const newFiles = [...files.slice(0, index), ...files.slice(index + 1)];
+
+        const store = new DataTransfer();
+        newFiles.forEach((file) => store.items.add(file));
+
+        if (inputRef.current) {
+            inputRef.current.files = store.files;
         }
 
-        const formData = new FormData()
-        if (files) {
-            formData.append('file', files)
-        }
-
-        const result = await fetch('https://jsonplaceholder.typicode.com/photos', {
-            method: 'post',
-            body: formData,
-            headers: {
-                authorization:
-                    'Bearer zmk1g6n0xia2eq8f6pdy8rxrgwcjzs.d7iec3dk41357xcbqno59m8tnzf671pv5hz1ghtgiy33xujmk0.54da9zfdt5fgrtwr0hyb3o5loqjsqb',
-            },
-        })
-            .then((res) => res.json())
-            .then((body) => body.url)
-
-        if (result) setShowImages([...showImages, result])
-    }
-
-    const handleDelete = (idx) => {
-        setShowImages([
-            ...showImages.slice(0, idx),
-            ...showImages.slice(idx + 1, showImages.length)
-        ])
-    }
+        setFiles(newFiles);
+    };
 
     return (
         <div>
-            <label htmlFor="a"
-                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label} </label>
-            <input type="file"
-                   multiple
-                   accept="image/*"
-                   id="a"
-                   onChange={handleUpload}
-                   className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500
-                                                      file:mr-4 file:py-2 file:px-4
-                                                      file:rounded-md file:border-0
-                                                      file:text-sm file:font-semibold
-                                                      file:bg-blue-500 file:text-white
-                                                      hover:file:bg-blue-600 "/>
-
-            {showImages.map((src, idx) => {
-                return (
-                    <div>
-                        <image src={src} alt={`${src}`} />
-                        <button onClick={() => handleDelete(idx)}>X</button>
-                    </div>
-                )
-            })}
+            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label} </label>
+            <input
+                className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ribg-gray-800 focus:bordbg-gray-800 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ribg-gray-800 dark:focus:bordbg-gray-800 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-800 file:text-white hover:file:bg-gray-800 "
+                ref={inputRef}
+                type="file"
+                max={max}
+                multiple={multiple}
+                onChange={handleChange} />
+            {files.length > 1 &&
+                <ul className="flex flex-wrap gap-3">
+                    {files.map((file, index) => (
+                        <li key={`${file.name}_${index}`}
+                            className="flex items-center mt-2 p-2 px-4 bg-gray-100 text-xs rounded-full"
+                        >
+                            {file.name}
+                            <button
+                                onClick={() => handleDelete(index)}
+                                className="ml-2"
+                            >
+                                <FontAwesomeIcon
+                                    className="text-sm"
+                                    icon={faTimes}
+                                />
+                            </button>
+                        </li>
+                    ))}
+                </ul>
+            }
         </div>
-    )
+    );
 }
+FormFile.propTypes = {
+    label: PropTypes.string,
+    disabled: PropTypes.bool,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    max: PropTypes.number,
+    multiple: PropTypes.bool,
+    required: PropTypes.bool,
+};
+
+FormFile.defaultProps = {
+    value: "",
+    max: 10,
+    multiple: false,
+    disabled: false,
+    autoFocus: false,
+    onChange: null,
+};
+
