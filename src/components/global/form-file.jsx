@@ -39,6 +39,7 @@ export default function FormFile({label}) {
             <label htmlFor="a"
                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label} </label>
             <input type="file"
+                   multiple
                    accept="image/*"
                    id="a"
                    onChange={handleUpload}

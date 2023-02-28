@@ -7,7 +7,7 @@ import Button from "@/components/global/button";
 
 export default function Magazine({datas}) {
     return (
-        <div className="mt-10">
+        <>
             <PageTitle title="Works 관리"/>
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-8 bg-white">
                 <InputSearch/>
@@ -39,7 +39,7 @@ export default function Magazine({datas}) {
                                 {data.title}
                             </th>
                             <td className="p-6 text-md text-base">
-                                <Link href={`/magazine/${data.id}`}>
+                                <Link href={`/works/${data.id}`}>
                                     <span>{data.title}</span>
                                 </Link>
                             </td>
@@ -63,11 +63,10 @@ export default function Magazine({datas}) {
                 </table>
             </div>
             <div className="flex justify-end mt-6 space-x-2">
-                <Button name="글 쓰기"/>
+                <Button name="글 쓰기" size="md"/>
             </div>
             <PaginationItem/>
-
-        </div>
+        </>
     );
 }
 

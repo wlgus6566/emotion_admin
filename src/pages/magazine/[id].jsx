@@ -74,7 +74,7 @@ export default function MagazineDetail({data}) {
                         <FormFile label="MO 작성자 이미지 *"/>
                     </div>
                     <div className="flex justify-end mt-6 space-x-2">
-                        <Button name="업로드 하기"/>
+                        <Button name="업로드 하기" size="md"/>
                     </div>
                 </form>
 

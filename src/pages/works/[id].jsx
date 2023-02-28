@@ -65,7 +65,7 @@ export default function MagazineDetail() {
                                     label="프로젝트 타입"
                                     onChange={handleCheckboxGroupChange}
                                 />
-                                {/*<p>Selected options: {selectedOptions.join(', ')}</p>*/}
+                                <p>Selected options: {selectedOptions.join(', ')}</p>
                             </div>
                         </div>
 
@@ -141,7 +141,7 @@ export default function MagazineDetail() {
                         <FormInput name="name" placeholder="작성자명" label="작성자명"/>
                     </div>
                     <div className="flex justify-end mt-6 space-x-2">
-                        <Button name="업로드 하기"/>
+                        <Button name="업로드 하기" size="md"/>
                     </div>
                 </form>
 
