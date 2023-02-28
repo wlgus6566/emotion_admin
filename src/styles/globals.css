@@ -8,5 +8,6 @@ html {
 }
 .font-family-karla { font-family: karla; }
 body {
+    min-width: 1280px;
     @apply bg-gray-100 font-family-karla
 }

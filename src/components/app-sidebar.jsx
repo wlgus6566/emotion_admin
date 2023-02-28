@@ -64,8 +64,8 @@ export default function AppSidebar() {
                         </div>
                     </div>
                 </Link>
-                <div className="absolute w-100 left-0 bottom-6 w-100">
-                    <div className="flex w-100 flex-col items-center justify-center">
+                <div className="absolute left-0 bottom-6 w-full">
+                    <div className="flex flex-col items-center justify-center">
                         <img
                             className="w-3/12 h-auto"
                             src="/nav_logo.png"

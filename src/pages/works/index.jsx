@@ -50,7 +50,7 @@ export default function Magazine({datas}) {
                                 Laptop
                             </td>
                             <td className="p-6 text-md text-base">
-                                <Link href={`/magazine/${data.id}`}>
+                                <Link href={`/works/${data.id}`}>
                                             <span
                                                 className="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
                                             </span>

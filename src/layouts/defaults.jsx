@@ -1,7 +1,6 @@
 import AppSidebar from "@/components/app-sidebar";
 import AppHeader from "@/components/app-header";
 import {useState} from "react";
-import {useRouter} from "next/router";
 export default function DefaultsLayout({ children }) {
     const [toggle, setToggle] = useState(true);
     return (
@@ -18,7 +17,7 @@ export default function DefaultsLayout({ children }) {
             }
             <div
                 style={{ transition: 'all 0.35s' }}
-                className={`p-16 pt-32 flex-1 ml-56 ${
+                className={`p-16 pt-28 flex-1 ml-56 ${
                     !toggle ? "ml-0" : ""}`}>
                 { children }
             </div>
