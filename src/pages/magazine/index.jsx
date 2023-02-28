@@ -4,8 +4,11 @@ import PageTitle from "@/components/global/page-title";
 import InputSearch from "@/components/global/input-search";
 import Link from "next/link";
 import Button from "@/components/global/button";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 export default function Magazine({datas}) {
+
     return (
         <>
             <PageTitle title="Magazine 관리"/>
@@ -71,8 +74,14 @@ export default function Magazine({datas}) {
 }
 
 export const getStaticProps = async () => {
-    const res = await fetch('https://jsonplaceholder.typicode.com/photos?_start=0&_end=10')
-    const datas = await res.json();
+    const res = await axios({
+        url : `https://jsonplaceholder.typicode.com/photos?_start=0&_end=10`,
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    const datas = await res.data;
 
     return {
         props: {

@@ -17,8 +17,8 @@ export default function DefaultsLayout({ children }) {
             }
             <div
                 style={{ transition: 'all 0.35s' }}
-                className={`p-16 pt-28 flex-1 ml-56 ${
-                    !toggle ? "ml-0" : ""}`}>
+                className={`p-16 pt-28 flex-1 ${
+                    !toggle ? "ml-0" : "ml-56"}`}>
                 { children }
             </div>
         </>

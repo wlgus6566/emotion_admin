@@ -5,7 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 export default function AppSidebar() {
     const router = useRouter()
     return (
-        <div className="fixed w-56 h-full shadow-sm font-family-karla bg-primary z-20">
+        <div
+            style={{ transition: 'all 0.35s' }}
+            className="fixed w-56 h-full shadow-sm font-family-karla bg-primary z-20">
             <div className="flex justify-center my-14">
                 <picture>
                     <img

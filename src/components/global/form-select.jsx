@@ -15,6 +15,5 @@ export default function FormSelect({label}) {
                 <option value="DE">Germany</option>
             </select>
         </div>
-
     )
 }

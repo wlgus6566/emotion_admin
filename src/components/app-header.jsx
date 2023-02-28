@@ -3,7 +3,8 @@ import {faBars} from "@fortawesome/free-solid-svg-icons";
 
 export default function AppHeader({toggle, setToggle}) {
     return (
-        <header class="flex justify-between items-center w-full bg-white p-5 z-10 pl-60 py-2 px-6">
+        <header
+            className="flex justify-between items-center w-full bg-white p-5 z-10 pl-60 py-2 px-6">
             <button onClick={() => setToggle(!toggle)}>
                 <FontAwesomeIcon
                     className="text-3xl"
