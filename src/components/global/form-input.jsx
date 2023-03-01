@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 
 const FormInput = ({
@@ -16,15 +16,21 @@ const FormInput = ({
     const [inputValue, setInputValue] = useState(value);
     const [isInputError, setIsInputError] = useState(false);
 
-    const handleChange = (e,name) => {
+
+    const handleChange = (e) => {
         let checkError = false;
         setIsInputError(checkError);
         setInputValue(e.target.value);
-        onChange(name, e.target.value);
     };
 
+    useEffect(() => {
+        if (onChange) {
+            onChange(inputValue);
+        }
+    }, [inputValue]);
+
     const handleFocus = (e,name) => {
-        onFocus(e.target.value, name);
+        //onFocus(e.target.value, name);
     };
 
     return (
@@ -39,7 +45,7 @@ const FormInput = ({
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 value={inputValue}
                 type={type}
-                onChange= {(e) => handleChange(e, name)}
+                onChange={handleChange}
                 onFocus= {(e) => handleFocus(e, name)}
                 disabled={disabled}
                 placeholder={placeholder}

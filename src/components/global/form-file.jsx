@@ -16,6 +16,11 @@ export default function FormFile(
         setFiles(Array.from(e.target.files || []));
     };
 
+    const handleAdd = (e) => {
+        console.log(Array.from(e.target.files))
+        console.log( [...files, Array.from(e.target.files)])
+        setFiles( [...files,  Array.from(e.target.files || [])])
+    };
     const handleDelete = (index) => {
         const newFiles = [...files.slice(0, index), ...files.slice(index + 1)];
 
@@ -38,8 +43,7 @@ export default function FormFile(
                 type="file"
                 max={max}
                 multiple={multiple}
-                onChange={handleChange} />
-            {files.length > 1 &&
+                onChange={handleAdd} />
                 <ul className="flex flex-wrap gap-3">
                     {files.map((file, index) => (
                         <li key={`${file.name}_${index}`}
@@ -58,7 +62,6 @@ export default function FormFile(
                         </li>
                     ))}
                 </ul>
-            }
         </div>
     );
 }
@@ -66,7 +69,7 @@ FormFile.propTypes = {
     label: PropTypes.string,
     disabled: PropTypes.bool,
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    max: PropTypes.number,
+    max: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     multiple: PropTypes.bool,
     required: PropTypes.bool,
 };
