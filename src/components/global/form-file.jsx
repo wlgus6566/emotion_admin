@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import {useState, useRef, useEffect} from "react";
 import PropTypes from "prop-types";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
@@ -6,7 +6,8 @@ export default function FormFile(
     {
         label,
         max,
-        multiple
+        multiple,
+        onChange = () => {},
     }
 ) {
     const inputRef = useRef(null);
@@ -26,6 +27,10 @@ export default function FormFile(
         }
         setFiles(newFiles);
     };
+
+    useEffect(() => {
+        onChange && onChange(files)
+    }, [files]);
 
     return (
         <div>
@@ -59,16 +64,17 @@ export default function FormFile(
     );
 }
 FormFile.propTypes = {
+    file: PropTypes.func,
     label: PropTypes.string,
     disabled: PropTypes.bool,
-    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     max: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     multiple: PropTypes.bool,
     required: PropTypes.bool,
+    onChange: PropTypes.func,
 };
 
 FormFile.defaultProps = {
-    value: "",
+    file: () => {},
     max: 10,
     multiple: false,
     disabled: false,

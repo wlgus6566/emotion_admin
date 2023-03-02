@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 
 const FormInput = ({
@@ -59,7 +59,7 @@ FormInput.propTypes = {
 };
 
 FormInput.defaultProps = {
-    value: "",
+    //value: "",
     type: "text",
     disabled: false,
     autoFocus: false,

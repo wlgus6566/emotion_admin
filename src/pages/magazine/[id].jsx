@@ -17,21 +17,21 @@ export default function MagazineDetail({data}) {
         contentsImgFiles: [],
         contentsHtml: '',
         department: '',
-        date: '',
+        date: new Date(),
         position: '',
         writer: '',
-        pcIndexImg: [],
+ /*       pcIndexImg: [],
         moIndexThumbImg: [],
         pcBodyImg: [],
         moBodyImg: [],
         pcWriterImg: [],
-        moWriterImg: [],
+        moWriterImg: [],*/
     });
 
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(formData);
-        resetForm()
+        //resetForm()
     };
 
     const resetForm = () => {
@@ -42,7 +42,7 @@ export default function MagazineDetail({data}) {
             contentsImgFiles: [],
             contentsHtml: '',
             department: '',
-            date: '',
+            date: new Date(),
             position: '',
             writer: '',
             pcIndexImg: [],
@@ -55,14 +55,6 @@ export default function MagazineDetail({data}) {
     }
     const handleFormChange = (val, name) => {
         setFormData({...formData, [name]: val})
-        /* const { name, value, type } = event.target;
-
-         if (type === 'file') {
-             const file = event.target.files[0];
-             setFormData({ ...formData, [name]: file });
-         } else {
-             setFormData({ ...formData, [name]: value });
-         }*/
     };
 
     return (
@@ -98,9 +90,10 @@ export default function MagazineDetail({data}) {
                             <div className="mb-6">
                                 <FormFile
                                     value={formData.contentsImgFiles}
+                                    onChange={(e) => handleFormChange(e, 'contentsImgFiles')}
                                     max="3"
                                     multiple={true}
-                                    label="본문 첨가이미지 *"/>
+                                    label="본문 첨가이미지"/>
                             </div>
                             <div className="mb-6">
                                 <FormTextarea
@@ -132,12 +125,14 @@ export default function MagazineDetail({data}) {
                     <div className="grid gap-6 mb-6 md:grid-cols-2">
                         <FormInput
                             value={formData.position}
+                            onChange={(e) => handleFormChange(e, 'position')}
                             name="position"
                             placeholder="작성자 직책"
                             label="작성자 직책"
                         />
                         <FormInput
                             value={formData.writer}
+                            onChange={(e) => handleFormChange(e, 'writer')}
                             name="writer"
                             placeholder="작성자명"
                             label="작성자명"
@@ -146,36 +141,42 @@ export default function MagazineDetail({data}) {
                     <hr className="my-10"/>
 
                     {/* 이미지 업로드 */}
-                    <div className="mb-6">
+             {/*       <div className="mb-6">
                         <FormFile
-                            value={formData.moIndexThumbImg}
+                            value={formData.contentsImgFiles}
+                            onChange={(e) => handleFormChange(e, 'moIndexThumbImg')}
                             label="MO 목록 썸네일 이미지 *"
                         />
                     </div>
                     <div className="mb-6">
                         <FormFile
                             value={formData.pcBodyImg}
+                            onChange={(e) => handleFormChange(e, 'pcBodyImg')}
                             label="PC 본문 이미지 *"
                         />
                     </div>
                     <div className="mb-6">
                         <FormFile
                             value={formData.moBodyImg}
+                            onChange={(e) => handleFormChange(e, 'moBodyImg')}
                             label="MO 본문 이미지 *"
                         />
                     </div>
                     <div className="mb-6">
                         <FormFile
                             value={formData.pcWriterImg}
+                            onChange={(e) => handleFormChange(e, 'pcWriterImg')}
                             label="PC 작성자 이미지 *"
                         />
                     </div>
                     <div className="mb-6">
                         <FormFile
                             value={formData.moWriterImg}
+                            onChange={(e) => handleFormChange(e, 'moWriterImg')}
                             label="MO 작성자 이미지 *"
                         />
-                    </div>
+                    </div>*/}
+
                     <div className="flex justify-end mt-6 space-x-2">
                         <Button
                             type="submit"
