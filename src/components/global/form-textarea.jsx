@@ -1,11 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import PropTypes from "prop-types";
 
 const FormTextarea = ({
                           label,
                           name,
                           disabled,
-                          value: propValue,
+                          value = "",
                           rows,
                           autoFocus,
                           errorMessage,
@@ -13,23 +13,19 @@ const FormTextarea = ({
                           onFocus,
                           placeholder
                       }) => {
-    const [value, setValue] = useState(propValue);
-    const [isInputError, setIsInputError] = useState(false);
-    const [isFirstFocus, setIsFirstFocus] = useState(false);
+    const [inputValue, setInputValue] = useState(value);
+    //const [isInputError, setIsInputError] = useState(false);
+    //const [isFirstFocus, setIsFirstFocus] = useState(false);
 
     const ref = useRef(null);
 
     const handleChange = (e) => {
-        const checkError = false;
-        setIsInputError(checkError);
-        setValue(e.target.value);
-
-        if (onChange) {
-            onChange(name, e.target.value);
-        }
+        /*const checkError = false;
+        setIsInputError(checkError);*/
+        setInputValue(e.target.value);
     };
 
-    const handleFocus = (e) => {
+/*    const handleFocus = (e) => {
         if (!isFirstFocus) {
             setIsFirstFocus(true);
         }
@@ -43,7 +39,11 @@ const FormTextarea = ({
         if (autoFocus) {
             ref.current.focus();
         }
-    };
+    };*/
+
+    useEffect(() => {
+        onChange && onChange(inputValue)
+    }, [inputValue]);
 
     return (
         <div>
@@ -61,13 +61,13 @@ const FormTextarea = ({
                 value={value}
                 ref={ref}
                 onChange={handleChange}
-                onFocus={handleFocus}
                 disabled={disabled}
                 rows={rows}
                 placeholder={placeholder}
-                onLoad={handleMount}
+                //onLoad={handleMount}
+                //onFocus={handleFocus}
             />
-            {isInputError && errorMessage}
+         {/*   {isInputError && errorMessage}*/}
         </div>
     );
 };
@@ -78,10 +78,10 @@ FormTextarea.propTypes = {
     disabled: PropTypes.bool,
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     rows: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    autoFocus: PropTypes.bool,
-    errorMessage: PropTypes.string,
+    //autoFocus: PropTypes.bool,
+    //errorMessage: PropTypes.string,
     onChange: PropTypes.func,
-    onFocus: PropTypes.func,
+    //onFocus: PropTypes.func,
     placeholder: PropTypes.string,
 };
 
@@ -89,7 +89,7 @@ FormTextarea.defaultProps = {
     value: "",
     type: "text",
     disabled: false,
-    autoFocus: false,
+    //autoFocus: false,
     rows: 8,
     onChange: null,
     onFocus: null,

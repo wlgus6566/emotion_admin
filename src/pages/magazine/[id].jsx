@@ -28,8 +28,6 @@ export default function MagazineDetail({data}) {
         moWriterImg: [],
     });
 
-    const [val, setVal] = useState('');
-
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(formData);
@@ -55,16 +53,16 @@ export default function MagazineDetail({data}) {
             moWriterImg: [],
         });
     }
-    const handleInputChange = (val2, name) => {
-        setFormData({ ...formData, [name]:val2 })
-       /* const { name, value, type } = event.target;
+    const handleFormChange = (val, name) => {
+        setFormData({...formData, [name]: val})
+        /* const { name, value, type } = event.target;
 
-        if (type === 'file') {
-            const file = event.target.files[0];
-            setFormData({ ...formData, [name]: file });
-        } else {
-            setFormData({ ...formData, [name]: value });
-        }*/
+         if (type === 'file') {
+             const file = event.target.files[0];
+             setFormData({ ...formData, [name]: file });
+         } else {
+             setFormData({ ...formData, [name]: value });
+         }*/
     };
 
     return (
@@ -73,13 +71,25 @@ export default function MagazineDetail({data}) {
             <div className="relative overflow-x-auto shadow-md sm:rounded-lg p-8 bg-white">
                 <form onSubmit={handleSubmit}>
                     <div className="mb-6">
-                        <FormInput value={formData.pcTitle} onChange={(e) => handleInputChange(e, 'pcTitle')} name="pcTitle" placeholder="PC 제목을 입력하세요." label="PC 제목"/>
+                        <FormInput value={formData.pcTitle}
+                                   onChange={(e) => handleFormChange(e, 'pcTitle')}
+                                   name="pcTitle"
+                                   placeholder="PC 제목을 입력하세요."
+                                   label="PC 제목"/>
                     </div>
                     <div className="mb-6">
-                        <FormInput value={formData.moTitle} onChange={(e) => handleInputChange(e, 'moTitle')}  name="moTitle" placeholder="MO 제목을 입력하세요."  label="MO 제목"/>
+                        <FormInput value={formData.moTitle}
+                                   onChange={(e) => handleFormChange(e, 'moTitle')}
+                                   name="moTitle"
+                                   placeholder="MO 제목을 입력하세요."
+                                   label="MO 제목"/>
                     </div>
                     <div className="mb-6">
-                        <FormTextarea value={formData.desc} name="desc" placeholder="설명을 입력하세요."  label="설명"/>
+                        <FormTextarea value={formData.desc}
+                                      onChange={(e) => handleFormChange(e, 'desc')}
+                                      name="desc"
+                                      placeholder="설명을 입력하세요."
+                                      label="설명"/>
                     </div>
 
                     <div className="my-20">
@@ -89,7 +99,8 @@ export default function MagazineDetail({data}) {
                                 <FormFile value={formData.contentsImgFiles} max="3" multiple={true} label="본문 첨가이미지 *"/>
                             </div>
                             <div className="mb-6">
-                                <FormTextarea value={formData.contentsHtml} name="desc" placeholder="본문을 입력하세요." rows="20" label="본문"/>
+                                <FormTextarea value={formData.contentsHtml} name="desc" placeholder="본문을 입력하세요."
+                                              rows="20" label="본문"/>
                             </div>
                         </div>
                     </div>
@@ -100,7 +111,7 @@ export default function MagazineDetail({data}) {
                     </div>
                     <div className="grid gap-6 mb-6 md:grid-cols-2">
                         <FormInput value={formData.position} name="position" placeholder="작성자 직책" label="작성자 직책"/>
-                        <FormInput value={formData.writer}  name="writer" placeholder="작성자명" label="작성자명"/>
+                        <FormInput value={formData.writer} name="writer" placeholder="작성자명" label="작성자명"/>
                     </div>
                     <hr className="my-10"/>
 
@@ -109,13 +120,13 @@ export default function MagazineDetail({data}) {
                         <FormFile value={formData.moIndexThumbImg} label="MO 목록 썸네일 이미지 *"/>
                     </div>
                     <div className="mb-6">
-                        <FormFile value={formData.pcBodyImg}  label="PC 본문 이미지 *"/>
+                        <FormFile value={formData.pcBodyImg} label="PC 본문 이미지 *"/>
                     </div>
                     <div className="mb-6">
                         <FormFile value={formData.moBodyImg} label="MO 본문 이미지 *"/>
                     </div>
                     <div className="mb-6">
-                        <FormFile value={formData.pcWriterImg}  label="PC 작성자 이미지 *"/>
+                        <FormFile value={formData.pcWriterImg} label="PC 작성자 이미지 *"/>
                     </div>
                     <div className="mb-6">
                         <FormFile value={formData.moWriterImg} label="MO 작성자 이미지 *"/>
@@ -131,7 +142,7 @@ export default function MagazineDetail({data}) {
 }
 
 export const getStaticProps = async (context) => {
-    const { id } = context.params
+    const {id} = context.params
     const res = await fetch(`https://jsonplaceholder.typicode.com/photos/${id}`)
     const data = await res.json();
     return {
@@ -147,7 +158,7 @@ export const getStaticPaths = async () => {
     const ids = datas.map(data => data.id);
     const paths = ids.map(id => { //동적으로 id 생성
         return {
-            params: { id: id.toString() } //context
+            params: {id: id.toString()} //context
         }
     })
 

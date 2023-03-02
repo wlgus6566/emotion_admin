@@ -5,7 +5,7 @@ import InputSearch from "@/components/global/input-search";
 import Link from "next/link";
 import Button from "@/components/global/button";
 
-export default function Magazine({datas}) {
+export default function Works({datas}) {
     return (
         <>
             <PageTitle title="Works 관리"/>
@@ -82,4 +82,4 @@ export const getStaticProps = async () => {
     }
 }
 
-Magazine.layout = DefaultsLayout;
+Works.layout = DefaultsLayout;

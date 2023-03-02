@@ -9,7 +9,7 @@ import FormCheckboxGroup from "@/components/global/form-checkbox-group";
 import {useState} from "react";
 import FormSelect from "@/components/global/form-select";
 
-export default function MagazineDetail() {
+export default function WorksDetail() {
     const [selectedOptions, setSelectedOptions] = useState([]);
     function handleCheckboxGroupChange(newSelectedOptions) {
         setSelectedOptions(newSelectedOptions);
@@ -177,4 +177,4 @@ export const getStaticPaths = async () => {
     }
 }
 
-MagazineDetail.layout = DefaultsLayout;
+WorksDetail.layout = DefaultsLayout;

@@ -5,33 +5,31 @@ const FormInput = ({
                        label,
                        name,
                        type,
-                       errorMessage,
                        disabled,
                        placeholder,
                        required,
                        value = "",
                        onChange = () => {},
-                       onFocus = () => {},
+                       errorMessage,
                    }) => {
     const [inputValue, setInputValue] = useState(value);
-    const [isInputError, setIsInputError] = useState(false);
+    //const [isInputError, setIsInputError] = useState(false);
 
 
     const handleChange = (e) => {
-        let checkError = false;
-        setIsInputError(checkError);
+       //const checkError = false;
+        //setIsInputError(checkError);
         setInputValue(e.target.value);
     };
+/*
+    const handleFocus = (e,name) => {
+        onFocus(e.target.value, name);
+    };
+*/
 
     useEffect(() => {
-        if (onChange) {
-            onChange(inputValue);
-        }
+        onChange && onChange(inputValue)
     }, [inputValue]);
-
-    const handleFocus = (e,name) => {
-        //onFocus(e.target.value, name);
-    };
 
     return (
         <div>
@@ -39,19 +37,18 @@ const FormInput = ({
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
             >
                 {label}
-                <span className="text-primary ml-1"> *</span>
+                {required &&  <span className="text-primary ml-1"> *</span>}
             </label>
             <input
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 defaultValue={inputValue}
                 type={type}
                 onChange={(e) => {handleChange(e)}}
-                onFocus= {(e) => handleFocus(e, name)}
                 disabled={disabled}
                 placeholder={placeholder}
                 required={required}
             />
-            {isInputError && errorMessage}
+         {/*   {isInputError && errorMessage}*/}
         </div>
     );
 };
@@ -66,7 +63,6 @@ FormInput.propTypes = {
     required: PropTypes.bool,
     errorMessage: PropTypes.string,
     onChange: PropTypes.func,
-    onFocus: PropTypes.func,
 };
 
 FormInput.defaultProps = {
@@ -75,7 +71,7 @@ FormInput.defaultProps = {
     disabled: false,
     autoFocus: false,
     onChange: null,
-    onFocus: null,
+    required: true,
 };
 
 
