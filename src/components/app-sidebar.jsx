@@ -18,7 +18,7 @@ export default function AppSidebar() {
                 </picture>
             </div>
             <div className="flex flex-col">
-            <Link href="/">
+           {/*     <Link href="/">
                     <div
                         className={`text-lg pl-10 py-6 rounded text-center cursor-pointer flex items-center transition-colors ${
                             router.pathname == "/"
@@ -33,7 +33,7 @@ export default function AppSidebar() {
                             <p>Home</p>
                         </div>
                     </div>
-                </Link>
+                </Link>*/}
                 <Link href="/works">
                     <div
                         className={`text-lg pl-10 py-6 rounded text-center cursor-pointer flex items-center transition-colors ${

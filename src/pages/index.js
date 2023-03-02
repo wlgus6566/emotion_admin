@@ -1,9 +1,11 @@
+'use client';
+import React, { useEffect } from "react";
+import Router from 'next/router'
 export default function Home() {
-  return (
-    <div>
-        <div className="px-4 md:px-16">
-            dddd
-        </div>
-    </div>
-  )
-}
+    useEffect(() => {
+        const {pathname} = Router
+        if(pathname == '/' ){
+            Router.push('/works')
+        }
+    });
+};
