@@ -96,43 +96,92 @@ export default function MagazineDetail({data}) {
                         <h4 className="text-lg font-semibold">본문</h4>
                         <div className="border-y-2 border-y-black p-4 my-4">
                             <div className="mb-6">
-                                <FormFile value={formData.contentsImgFiles} max="3" multiple={true} label="본문 첨가이미지 *"/>
+                                <FormFile
+                                    value={formData.contentsImgFiles}
+                                    max="3"
+                                    multiple={true}
+                                    label="본문 첨가이미지 *"/>
                             </div>
                             <div className="mb-6">
-                                <FormTextarea value={formData.contentsHtml} name="desc" placeholder="본문을 입력하세요."
-                                              rows="20" label="본문"/>
+                                <FormTextarea
+                                    value={formData.contentsHtml}
+                                    onChange={(e) => handleFormChange(e, 'contentsHtml')}
+                                    name="contentsHtml"
+                                    placeholder="본문을 입력하세요."
+                                    rows="20" label="본문"/>
                             </div>
                         </div>
                     </div>
 
                     <div className="grid gap-6 mb-6 md:grid-cols-2">
-                        <FormInput value={formData.department} name="department" placeholder="작성자 부서명" label="작성자 부서명"/>
-                        <FormDatepicker value={formData.date} name="date" label="작성일자" placeholderText="작성일자 선택"/>
+                        <FormInput
+                            value={formData.department}
+                            onChange={(e) => handleFormChange(e, 'department')}
+                            name="department"
+                            placeholder="작성자 부서명"
+                            label="작성자 부서명"
+                        />
+                        <FormDatepicker
+                            value={formData.date}
+                            onChange={(e) => handleFormChange(e, 'date')}
+                            name="date"
+                            label="작성일자"
+                            placeholderText="작성일자 선택"
+                        />
                     </div>
                     <div className="grid gap-6 mb-6 md:grid-cols-2">
-                        <FormInput value={formData.position} name="position" placeholder="작성자 직책" label="작성자 직책"/>
-                        <FormInput value={formData.writer} name="writer" placeholder="작성자명" label="작성자명"/>
+                        <FormInput
+                            value={formData.position}
+                            name="position"
+                            placeholder="작성자 직책"
+                            label="작성자 직책"
+                        />
+                        <FormInput
+                            value={formData.writer}
+                            name="writer"
+                            placeholder="작성자명"
+                            label="작성자명"
+                        />
                     </div>
                     <hr className="my-10"/>
 
                     {/* 이미지 업로드 */}
                     <div className="mb-6">
-                        <FormFile value={formData.moIndexThumbImg} label="MO 목록 썸네일 이미지 *"/>
+                        <FormFile
+                            value={formData.moIndexThumbImg}
+                            label="MO 목록 썸네일 이미지 *"
+                        />
                     </div>
                     <div className="mb-6">
-                        <FormFile value={formData.pcBodyImg} label="PC 본문 이미지 *"/>
+                        <FormFile
+                            value={formData.pcBodyImg}
+                            label="PC 본문 이미지 *"
+                        />
                     </div>
                     <div className="mb-6">
-                        <FormFile value={formData.moBodyImg} label="MO 본문 이미지 *"/>
+                        <FormFile
+                            value={formData.moBodyImg}
+                            label="MO 본문 이미지 *"
+                        />
                     </div>
                     <div className="mb-6">
-                        <FormFile value={formData.pcWriterImg} label="PC 작성자 이미지 *"/>
+                        <FormFile
+                            value={formData.pcWriterImg}
+                            label="PC 작성자 이미지 *"
+                        />
                     </div>
                     <div className="mb-6">
-                        <FormFile value={formData.moWriterImg} label="MO 작성자 이미지 *"/>
+                        <FormFile
+                            value={formData.moWriterImg}
+                            label="MO 작성자 이미지 *"
+                        />
                     </div>
                     <div className="flex justify-end mt-6 space-x-2">
-                        <Button type="submit" name="업로드 하기" size="md"/>
+                        <Button
+                            type="submit"
+                            name="업로드 하기"
+                            size="md"
+                        />
                     </div>
                 </form>
 

@@ -24,7 +24,6 @@ export default function FormFile(
         if (inputRef.current) {
             inputRef.current.files = store.files;
         }
-
         setFiles(newFiles);
     };
 
