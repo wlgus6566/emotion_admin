@@ -59,7 +59,7 @@ FormInput.propTypes = {
 };
 
 FormInput.defaultProps = {
-    //value: "",
+    value: "",
     type: "text",
     disabled: false,
     autoFocus: false,

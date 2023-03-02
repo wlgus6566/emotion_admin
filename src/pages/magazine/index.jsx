@@ -4,7 +4,6 @@ import PageTitle from "@/components/global/page-title";
 import InputSearch from "@/components/global/input-search";
 import Link from "next/link";
 import Button from "@/components/global/button";
-import {useEffect, useState} from "react";
 import axios from "axios";
 
 export default function Magazine({datas}) {

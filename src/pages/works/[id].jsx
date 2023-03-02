@@ -14,7 +14,7 @@ export default function WorksDetail() {
     function handleCheckboxGroupChange(newSelectedOptions) {
         setSelectedOptions(newSelectedOptions);
     }
-    const awardSelect = [
+    const awardOptions = [
         { label: '웨어러블', value: 'option1' },
         { label: '모바일 앱', value: 'option2' },
         { label: '모바일 웹', value: 'option3' },
@@ -26,18 +26,54 @@ export default function WorksDetail() {
         { label: '태블릿 앱', value: 'option9' },
         { label: '기타', value: 'option10' },
     ];
-    const options = [
-        { label: '웨어러블', value: 'option1' },
-        { label: '모바일 앱', value: 'option2' },
-        { label: '모바일 웹', value: 'option3' },
-        { label: 'PC 웹', value: 'option4' },
-        { label: '유지/운영', value: 'option5' },
-        { label: '리뉴얼', value: 'option6' },
-        { label: '신규구축', value: 'option7' },
-        { label: '컨설팅', value: 'option8' },
-        { label: '태블릿 앱', value: 'option9' },
-        { label: '기타', value: 'option10' },
-    ];
+
+    const [formData, setFormData] = useState({
+        projectTitle: '',
+        releaseDate: '',
+        projectName: '',
+        clientName: '',
+        listFontColor: '',
+        detailFontColor: '',
+        projectType: [],
+        kvPCBigImg: [],
+        kvMOBigImg: [],
+        kvPCSmallImg: [],
+        kvPCDetailImg: [],
+        kvMODetailImg: [],
+        awardOptions: [],
+        date: new Date(),
+        position: '',
+        writer: '',
+    });
+    const handleFormChange = (val, name) => {
+        setFormData({...formData, [name]: val})
+    };
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(formData);
+        //resetForm()
+    };
+
+    const resetForm = () => {
+        setFormData({
+            pcTitle: '',
+            moTitle: '',
+            desc: '',
+            contentsImgFiles: [],
+            contentsHtml: '',
+            department: '',
+            date: new Date(),
+            position: '',
+            writer: '',
+            pcIndexImg: [],
+            moIndexThumbImg: [],
+            pcBodyImg: [],
+            moBodyImg: [],
+            pcWriterImg: [],
+            moWriterImg: [],
+        });
+    }
+
     return (
         <div>
             <PageTitle title="Works 관리"/>
@@ -61,7 +97,7 @@ export default function WorksDetail() {
 
                             <div className="mb-6">
                                 <FormCheckboxGroup
-                                    checkboxes={options}
+                                    checkboxes={awardOptions}
                                     label="프로젝트 타입"
                                     onChange={handleCheckboxGroupChange}
                                 />
@@ -88,35 +124,90 @@ export default function WorksDetail() {
                     <div className="mt-6">
                         <FormFile label="KV MO DETAIL 이미지"/>
                     </div>
-                    <div className="my-6">
+                    <div className="my-20">
                         <h4 className="text-lg font-semibold">어워드</h4>
                         <div className="border-y-2 border-y-black p-4 my-4">
                             <div className="grid gap-6 mb-6 grid-cols-2">
-                                <FormSelect name="project_title" placeholder="프로젝트 타이틀" label="프로젝트 타이틀"/>
-                                <FormDatepicker  name="date" label="릴리즈일자"/>
+                                <FormSelect
+                                    name="award_list"
+                                    onChange={(e) => handleFormChange(e, 'awardList')}
+                                    options={awardOptions}
+                                    label="어워드"
+                                />
+                                <FormInput
+                                    name="award_txt"
+                                    placeholder="어워드 상세"
+                                    label="어워드 상세"
+                                />
+                            {/*    <FormDatepicker  name="date" label="릴리즈일자"/>*/}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="my-20">
+                        <h4 className="text-lg font-semibold">프로젝트 상세</h4>
+                        <div className="border-y-2 border-y-black p-4 my-4">
+                            <div className="grid gap-6 mb-6 grid-cols-2">
+                                <FormInput
+                                    name="project_title1"
+                                    placeholder="타이틀1"
+                                    label="타이틀1"
+                                />
+                                <FormInput
+                                    name="project_title2"
+                                    placeholder="타이틀2"
+                                    label="타이틀2"
+                                />
+                            </div>
+                            <div className="mt-6">
+                                <FormTextarea name="contents" placeholder="본문을 입력하세요."  label="본문"/>
+                            </div>
+                            <div className="grid gap-6 mt-6 md:grid-cols-2">
+                                <FormInput name="font_color" placeholder="폰트색상" label="폰트색상"/>
+                                <FormInput name="bg_color" placeholder="배경색상" label="배경색상"/>
+                            </div>
+                            <div className="mt-6">
+                                <FormInput name="pc_title" placeholder="유튜브 URL" label="유튜브 URL"/>
+                            </div>
+                            <div className="mt-6">
+                                <FormFile
+                                    label="필드 이미지"
+                                />
                             </div>
                         </div>
 
                     </div>
-                    <div className="mt-6">
-                        <FormInput name="pc_title" placeholder="PC 제목을 입력하세요." label="PC 제목"/>
+                    <div className="my-20">
+                        <h4 className="text-lg font-semibold">인터뷰</h4>
+                        <div className="border-y-2 border-y-black p-4 my-4">
+                            <div className="mt-6">
+                                <FormTextarea
+                                    name="interviewContents"
+                                    placeholder="내용"
+                                    label="내용"
+                                />
+                            </div>
+                            <div className="mt-6">
+                                <FormFile
+                                    label="PC 이미지"
+                                />
+                            </div>
+                            <div className="mt-6">
+                                <FormFile
+                                    label="MO 이미지"
+                                />
+                            </div>
+                        </div>
+
                     </div>
-                    <div className="mt-6">
-                        <FormInput name="mo_title" placeholder="MO 제목을 입력하세요."  label="MO 제목"/>
-                    </div>
-                    <div className="mt-6">
-                        <FormTextarea name="desc" placeholder="설명을 입력하세요."  label="설명"/>
-                    </div>
-                    <div className="mt-6">
-                        <FormTextarea name="desc" placeholder="본문을 입력하세요." rows="20" label="본문"/>
-                    </div>
-                    <div className="grid gap-6 mt-6 md:grid-cols-2">
-                        <FormInput name="department" placeholder="작성자 부서명" label="작성자 부서명"/>
-                        <FormDatepicker  name="date" label="작성일자" placeholderText="작성일자 선택"/>
-                    </div>
-                    <div className="grid gap-6 mt-6 md:grid-cols-2">
-                        <FormInput name="position" placeholder="작성자 직책" label="작성자 직책"/>
-                        <FormInput name="name" placeholder="작성자명" label="작성자명"/>
+                    <div className="my-20">
+                        <h4 className="text-lg font-semibold">투입인원</h4>
+                        <div className="border-y-2 border-y-black p-4 my-4">
+                            <div className="grid gap-6 mb-6 grid-cols-2">
+                                <FormInput name="inputPosition" placeholder="포지션" label="포지션"/>
+                                <FormInput name="inputName" placeholder="이름" label="이름"/>
+                            </div>
+                        </div>
+
                     </div>
                     <div className="flex justify-end mt-6 space-x-2">
                         <Button name="업로드 하기" size="md"/>
