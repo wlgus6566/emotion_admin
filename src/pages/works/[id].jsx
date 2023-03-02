@@ -10,10 +10,6 @@ import {useState} from "react";
 import FormSelect from "@/components/global/form-select";
 
 export default function WorksDetail() {
-    const [selectedOptions, setSelectedOptions] = useState([]);
-    function handleCheckboxGroupChange(newSelectedOptions) {
-        setSelectedOptions(newSelectedOptions);
-    }
     const awardOptions = [
         { label: '웨어러블', value: 'option1' },
         { label: '모바일 앱', value: 'option2' },
@@ -27,32 +23,193 @@ export default function WorksDetail() {
         { label: '기타', value: 'option10' },
     ];
 
+    /*
+    * {
+  "clientName": "SK텔레콤",
+  "launchingDt": 23.01,
+  "serviceName": "다양한 신규 서비스로 새로워진",
+  "projectTypeCode": "PJT_CONSTRUCTION",
+  "serviceName": "T 다이렉트샵",
+  "listFontColor": "#fff",
+  "detailFontColor": "#fff",
+  "useYn": "Y",
+  "sortingOrder": 1,
+  "keyVisualBigImageFile": {
+    "pcImage": {
+      "fileName": "image.png",
+      "fileSize": 77738,
+      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+      "fileExtensionName": "image/jpeg",
+      "delYn": false,
+      "fileSeq": 1
+    },
+    "moImage": {
+      "fileName": "image.png",
+      "fileSize": 77738,
+      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+      "fileExtensionName": "image/jpeg",
+      "delYn": false,
+      "fileSeq": 1
+    },
+    "keyVisualType": "KVT_DETAIL"
+  },
+  "keyVisualSmallImageFile": {
+    "pcImage": {
+      "fileName": "image.png",
+      "fileSize": 77738,
+      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+      "fileExtensionName": "image/jpeg",
+      "delYn": false,
+      "fileSeq": 1
+    },
+    "moImage": {
+      "fileName": "image.png",
+      "fileSize": 77738,
+      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+      "fileExtensionName": "image/jpeg",
+      "delYn": false,
+      "fileSeq": 1
+    },
+    "keyVisualType": "KVT_DETAIL"
+  },
+  "keyVisualDetailImageFile": {
+    "pcImage": {
+      "fileName": "image.png",
+      "fileSize": 77738,
+      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+      "fileExtensionName": "image/jpeg",
+      "delYn": false,
+      "fileSeq": 1
+    },
+    "moImage": {
+      "fileName": "image.png",
+      "fileSize": 77738,
+      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+      "fileExtensionName": "image/jpeg",
+      "delYn": false,
+      "fileSeq": 1
+    },
+    "keyVisualType": "KVT_DETAIL"
+  },
+  "awardList": [
+    {
+      "awardPrize": "스마트앱어워드 코리아 2021 브랜드쇼핑몰 분야 대상",
+      "awardSeq": 11
+    }
+  ],
+  "fieldList":
+    {
+      "backgroundColor": "#000",
+      "contents": "고객 관점에서 불필요한 단계를 줄이고 온라인에서 손쉽게 <br>가입/개통할",
+      "fieldTypeCode": "FDT_DESIGN",
+      "fontColor": "#fff",
+      "titleOne": "쉽고 빠르게 결제와 할인까지!",
+      "titleTwo": "쉽고 빠르게 결제와 할인까지!",
+      "youtubeUrl": "http://www.example.co.kr",
+      "fieldImageFile": {
+        "pcImage": {
+          "fileName": "image.png",
+          "fileSize": 77738,
+          "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+          "fileExtensionName": "image/jpeg",
+          "delYn": false,
+          "fileSeq": 1
+        },
+        "moImage": {
+          "fileName": "image.png",
+          "fileSize": 77738,
+          "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+          "fileExtensionName": "image/jpeg",
+          "delYn": false,
+          "fileSeq": 1
+        },
+        "moImageFileName": "01_overview_bg.png",
+        "moImagePhysicalName": "/upload/WORKS/MO/2017/T-pay/01_overview_bg.png",
+        "pcImageFileName": "01_overview_bg.png",
+        "pcImagePhysicalName": "/upload/WORKS/PC/2017/T-pay/01_overview_bg.png"
+      }
+    },
+  "interview": {
+    "pcImage": {
+      "fileName": "image.png",
+      "fileSize": 77738,
+      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+      "fileExtensionName": "image/jpeg",
+      "delYn": false,
+      "fileSeq": 1
+    },
+    "moImage": {
+      "fileName": "image.png",
+      "fileSize": 77738,
+      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+      "fileExtensionName": "image/jpeg",
+      "delYn": false,
+      "fileSeq": 1
+    },
+    "contents": "서비스 이용 연령층이 학습을 시작하는 초등 저학년부터 자기 주도적인 학습이 가능한 중등까지 넓은 점을 고려하여 다양한 연령층이 재미있고 효과적인 학습을 할 수 있도록 콘텐츠 기획부터 UI디자인까지 많은 아이디어와 고민을 한 프로젝트였습니다.",
+    "moImageFileName": "08_project_interview.jpg",
+    "moImagePhysicalName": "/upload/WORKS/MO/2017/T-pay/08_project_interview.png",
+    "pcImageFileName": "10_project_interview.png",
+    "pcImagePhysicalName": "/upload/WORKS/PC/2017/T-pay/10_project_interview.png"
+  },
+  "creditList": [
+    {
+      "name": "홍길동",
+      "position": "PM"
+    }
+  ]
+}*/
+
     const [formData, setFormData] = useState({
-        projectTitle: '',
-        releaseDate: '',
-        projectName: '',
-        clientName: '',
+        clientName: '', //클라이언트명
+        launchingDt: new(Date),
+        projectName: '', //프로젝트 타이틀
+        projectTypeCode: [],
+        serviceName: '', //프로젝트명
         listFontColor: '',
         detailFontColor: '',
-        projectType: [],
+        useYn: 'Y',
+        sortingOrder: 1,
+        keyVisualBigImageFile: {
+            pcImage: {
+            },
+            moImage: {
+            },
+            keyVisualType: "KVT_DETAIL"
+        },
         kvPCBigImg: [],
         kvMOBigImg: [],
         kvPCSmallImg: [],
         kvPCDetailImg: [],
         kvMODetailImg: [],
         awardOptions: [],
-        date: new Date(),
-        position: '',
-        writer: '',
+        projectDetailTitle1: '',
+        projectDetailTitle2: '',
+        projectDetailContents: '',
+        interviewContents: '',
+        interviewPCImg: '',
+        interviewMOImg: '',
+        creditList: [
+            {
+                name: '',
+                position: ''
+            }
+        ]
     });
+
+
     const handleFormChange = (val, name) => {
-        setFormData({...formData, [name]: val})
+        setFormData({...formData, [name]: val })
     };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(formData);
         //resetForm()
     };
+    const ddd = (e,name) => {
+        setFormData({...formData, [name]: e })
+    }
 
     const resetForm = () => {
         setFormData({
@@ -83,46 +240,102 @@ export default function WorksDetail() {
                         <h4 className="text-lg font-semibold">기본정보</h4>
                         <div className="border-y-2 border-y-black p-4 my-4">
                             <div className="grid gap-6 mb-6 grid-cols-[3fr,1fr]">
-                                <FormInput name="project_title" placeholder="프로젝트 타이틀" label="프로젝트 타이틀"/>
-                                <FormDatepicker  name="date" label="릴리즈일자"/>
+                                <FormInput
+                                    name="projectName"
+                                    onChange={(e) => handleFormChange(e, 'projectName')}
+                                    placeholder="프로젝트 타이틀"
+                                    label="프로젝트 타이틀"/>
+                                <FormDatepicker
+                                    value={formData.launchingDt}
+                                    onChange={(e) => handleFormChange(e, 'launchingDt')}
+                                    name="launchingDt"
+                                    label="릴리즈일자"
+                                    placeholderText="릴리즈일자 선택"
+                                />
                             </div>
                             <div className="grid gap-6 mb-6 grid-cols-[3fr,1fr]">
-                                <FormInput name="project_title" placeholder="프로젝트명" label="프로젝트명"/>
-                                <FormInput name="client_title" placeholder="클라이언트명" label="클라이언트명"/>
+                                <FormInput
+                                    value={formData.serviceName}
+                                    onChange={(e) => handleFormChange(e, 'serviceName')}
+                                    name="serviceName"
+                                    placeholder="프로젝트명"
+                                    label="프로젝트명"
+                                />
+                                <FormInput
+                                    value={formData.clientName}
+                                    onChange={(e) => handleFormChange(e, 'clientName')}
+                                    name="clientName"
+                                    placeholder="클라이언트명"
+                                    label="클라이언트명"
+                                />
                             </div>
                             <div className="grid gap-6 mb-6 md:grid-cols-2">
-                                <FormInput name="font_color" placeholder="목록폰트색상" label="목록폰트색상"/>
-                                <FormInput name="detail_font_color" placeholder="상세폰트색상" label="상세폰트색상"/>
+                                <FormInput
+                                    value={formData.listFontColor}
+                                    onChange={(e) => handleFormChange(e, 'listFontColor')}
+                                    name="listFontColor"
+                                    placeholder="목록폰트색상"
+                                    label="목록폰트색상"
+                                />
+                                <FormInput
+                                    value={formData.detailFontColor}
+                                    onChange={(e) => handleFormChange(e, 'detailFontColor')}
+                                    name="detailFontColor"
+                                    placeholder="상세폰트색상"
+                                    label="상세폰트색상"
+                                />
                             </div>
 
                             <div className="mb-6">
                                 <FormCheckboxGroup
                                     checkboxes={awardOptions}
                                     label="프로젝트 타입"
-                                    onChange={handleCheckboxGroupChange}
+                                    onChange={(e) => ddd(e, 'projectTypeCode')}
                                 />
-                                <p>Selected options: {selectedOptions.join(', ')}</p>
+
                             </div>
                         </div>
 
                     </div>
                     <div className="mt-6">
-                        <FormFile label="KV PC BIG 이미지"/>
+                        <FormFile
+                            value={formData.kvPCBigImg}
+                            onChange={(e) => handleFormChange(e, 'kvPCBigImg')}
+                            multiple={false}
+                            label="KV PC BIG 이미지"
+                        />
                     </div>
                     <div className="mt-6">
-                        <FormFile label="KV MO BIG 이미지"/>
+                        <FormFile
+                            value={formData.kvMOBigImg}
+                            onChange={(e) => handleFormChange(e, 'kvMOBigImg')}
+                            multiple={false}
+                            label="KV MO BIG 이미지"
+                        />
                     </div>
                     <div className="mt-6">
-                        <FormFile label="KV PC SMALL 이미지"/>
+                        <FormFile
+                            value={formData.kvPCSmallImg}
+                            onChange={(e) => handleFormChange(e, 'kvPCSmallImg')}
+                            multiple={false}
+                            label="KV PC SMALL 이미지"
+                        />
                     </div>
                     <div className="mt-6">
-                        <FormFile label="KV MO SMALL 이미지"/>
+                        <FormFile
+                            value={formData.kvPCDetailImg}
+                            onChange={(e) => handleFormChange(e, 'kvPCDetailImg')}
+                            multiple={false}
+                            label="KV PC DETAIL 이미지"
+                        />
                     </div>
                     <div className="mt-6">
-                        <FormFile label="KV PC DETAIL 이미지"/>
-                    </div>
-                    <div className="mt-6">
-                        <FormFile label="KV MO DETAIL 이미지"/>
+                        <FormFile
+                            value={formData.kvMODetailImg}
+                            onChange={(e) => handleFormChange(e, 'kvMODetailImg')}
+                            multiple={false}
+                            label="KV MO DETAIL 이미지"
+                        />
                     </div>
                     <div className="my-20">
                         <h4 className="text-lg font-semibold">어워드</h4>
@@ -139,9 +352,12 @@ export default function WorksDetail() {
                                     placeholder="어워드 상세"
                                     label="어워드 상세"
                                 />
-                            {/*    <FormDatepicker  name="date" label="릴리즈일자"/>*/}
+                                <div>
+                                    <Button size='sm' name="추가"/>
+                                </div>
                             </div>
                         </div>
+
                     </div>
                     <div className="my-20">
                         <h4 className="text-lg font-semibold">프로젝트 상세</h4>
@@ -159,7 +375,10 @@ export default function WorksDetail() {
                                 />
                             </div>
                             <div className="mt-6">
-                                <FormTextarea name="contents" placeholder="본문을 입력하세요."  label="본문"/>
+                                <FormTextarea
+                                    name="contents"
+                                    placeholder="본문을 입력하세요."
+                                    label="본문"/>
                             </div>
                             <div className="grid gap-6 mt-6 md:grid-cols-2">
                                 <FormInput name="font_color" placeholder="폰트색상" label="폰트색상"/>
@@ -203,8 +422,16 @@ export default function WorksDetail() {
                         <h4 className="text-lg font-semibold">투입인원</h4>
                         <div className="border-y-2 border-y-black p-4 my-4">
                             <div className="grid gap-6 mb-6 grid-cols-2">
-                                <FormInput name="inputPosition" placeholder="포지션" label="포지션"/>
+                                <FormInput
+                                    name="name"
+                                    onChange={(e) => handleFormChange(e, 'creditList')}
+                                    placeholder="포지션"
+                                    label="포지션"
+                                />
                                 <FormInput name="inputName" placeholder="이름" label="이름"/>
+                            </div>
+                            <div>
+                                <Button size='sm' name="추가"/>
                             </div>
                         </div>
 

@@ -15,7 +15,18 @@ export default function FormFile(
     const [files, setFiles] = useState([]);
 
     const handleChange = (e) => {
-        setFiles(Array.from(e.target.files || []));
+        const files = Array.from(e.target.files);
+        console.log(files)
+        const filesData = files.map((el) => {
+            return {
+                fileExtensionName: el.type,
+                fileName: el.name,
+                filePath: el.webkitRelativePath,
+                fileSize: el.size
+            }
+        })
+        console.log(filesData)
+        setFiles(filesData || []);
     };
     const handleDelete = (index) => {
         const newFiles = [...files.slice(0, index), ...files.slice(index + 1)];
@@ -49,10 +60,10 @@ export default function FormFile(
                 onChange={handleChange} />
                 <ul className="flex flex-wrap gap-3">
                     {files.map((file, index) => (
-                        <li key={`${file.name}_${index}`}
+                        <li key={`${file.fileName}_${index}`}
                             className="flex items-center mt-2 p-2 px-4 bg-gray-100 text-xs rounded-full"
                         >
-                            {file.name}
+                            {file.fileName}
                             <button
                                 onClick={() => handleDelete(index)}
                                 className="ml-2"
