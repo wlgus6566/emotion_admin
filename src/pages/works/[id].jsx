@@ -6,10 +6,25 @@ import FormDatepicker from "@/components/global/form-datepicker";
 import FormFile from "@/components/global/form-file";
 import Button from "@/components/global/button";
 import FormCheckboxGroup from "@/components/global/form-checkbox-group";
-import {useState} from "react";
+import {useCallback, useState} from "react";
 import FormSelect from "@/components/global/form-select";
 
 export default function WorksDetail() {
+
+    const [projectCount, setProjectCount] = useState([0])
+
+    const onAddDetailDiv = useCallback(() => {
+        const countArr = [...projectCount]
+        let counter = countArr.slice(-1)[0]
+        counter += 1
+        countArr.push(counter)
+        setProjectCount(countArr)
+    }, [projectCount])
+
+    const deleteItem = useCallback((index) => {
+        setProjectCount([].concat(projectCount).splice(index, 1));
+    },[projectCount])
+
     const awardOptions = [
         { label: '웨어러블', value: 'option1' },
         { label: '모바일 앱', value: 'option2' },
@@ -202,15 +217,15 @@ export default function WorksDetail() {
         setFormData({...formData, [name]: val })
     };
 
+    const makeFormData = (val, name) => {
+        setFormData({...formData, [name]: val })
+    };
+
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(formData);
         //resetForm()
     };
-    const ddd = (e,name) => {
-        setFormData({...formData, [name]: e })
-    }
-
     const resetForm = () => {
         setFormData({
             pcTitle: '',
@@ -290,7 +305,7 @@ export default function WorksDetail() {
                                 <FormCheckboxGroup
                                     checkboxes={awardOptions}
                                     label="프로젝트 타입"
-                                    onChange={(e) => ddd(e, 'projectTypeCode')}
+                                    onChange={(e) => handleFormChange(e, 'projectTypeCode')}
                                 />
 
                             </div>
@@ -352,49 +367,66 @@ export default function WorksDetail() {
                                     placeholder="어워드 상세"
                                     label="어워드 상세"
                                 />
-                                <div>
-                                    <Button size='sm' name="추가"/>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    {/* -----프로젝트 상세----- */}
+
+                    <div className="my-20 p-10 border-y-2 border-y-black">
+                        <h4 className="text-lg font-semibold">프로젝트 상세</h4>
+
+                        {projectCount && projectCount.map((item, index) => (
+                            <div key={index} className="p-10 my-4 border-y-2 border-y-gray">
+                                    <div className="flex justify-end">
+                                        <Button
+                                            onClick={(index) => deleteItem(index)}
+                                            type="button"
+                                            size='sm'
+                                            name={`삭제${index}`}/>
+                                    </div>
+
+                                <div className="grid gap-6 mb-6 grid-cols-2">
+                                    <FormInput
+                                        name="project_title1"
+                                        placeholder="타이틀1"
+                                        label="타이틀1"
+                                    />
+                                    <FormInput
+                                        name="project_title2"
+                                        placeholder="타이틀2"
+                                        label="타이틀2"
+                                    />
+                                </div>
+                                <div className="mt-6">
+                                    <FormTextarea
+                                        name="contents"
+                                        placeholder="본문을 입력하세요."
+                                        label="본문"/>
+                                </div>
+                                <div className="grid gap-6 mt-6 md:grid-cols-2">
+                                    <FormInput name="font_color" placeholder="폰트색상" label="폰트색상"/>
+                                    <FormInput name="bg_color" placeholder="배경색상" label="배경색상"/>
+                                </div>
+                                <div className="mt-6">
+                                    <FormInput name="pc_title" placeholder="유튜브 URL" label="유튜브 URL"/>
+                                </div>
+                                <div className="mt-6">
+                                    <FormFile
+                                        label="필드 이미지"
+                                    />
                                 </div>
                             </div>
-                        </div>
+                        ))}
 
-                    </div>
-                    <div className="my-20">
-                        <h4 className="text-lg font-semibold">프로젝트 상세</h4>
-                        <div className="border-y-2 border-y-black p-4 my-4">
-                            <div className="grid gap-6 mb-6 grid-cols-2">
-                                <FormInput
-                                    name="project_title1"
-                                    placeholder="타이틀1"
-                                    label="타이틀1"
-                                />
-                                <FormInput
-                                    name="project_title2"
-                                    placeholder="타이틀2"
-                                    label="타이틀2"
-                                />
-                            </div>
-                            <div className="mt-6">
-                                <FormTextarea
-                                    name="contents"
-                                    placeholder="본문을 입력하세요."
-                                    label="본문"/>
-                            </div>
-                            <div className="grid gap-6 mt-6 md:grid-cols-2">
-                                <FormInput name="font_color" placeholder="폰트색상" label="폰트색상"/>
-                                <FormInput name="bg_color" placeholder="배경색상" label="배경색상"/>
-                            </div>
-                            <div className="mt-6">
-                                <FormInput name="pc_title" placeholder="유튜브 URL" label="유튜브 URL"/>
-                            </div>
-                            <div className="mt-6">
-                                <FormFile
-                                    label="필드 이미지"
-                                />
-                            </div>
+                        <div>
+                            <Button onClick={onAddDetailDiv} type="button" size='sm' name="추가"/>
                         </div>
-
                     </div>
+                    {/* //----프로젝트 상세---- */}
+
+                    {/* -----인터뷰----- */}
                     <div className="my-20">
                         <h4 className="text-lg font-semibold">인터뷰</h4>
                         <div className="border-y-2 border-y-black p-4 my-4">
@@ -418,6 +450,8 @@ export default function WorksDetail() {
                         </div>
 
                     </div>
+                    {/* //-----인터뷰----- */}
+
                     <div className="my-20">
                         <h4 className="text-lg font-semibold">투입인원</h4>
                         <div className="border-y-2 border-y-black p-4 my-4">
@@ -437,7 +471,7 @@ export default function WorksDetail() {
 
                     </div>
                     <div className="flex justify-end mt-6 space-x-2">
-                        <Button name="업로드 하기" size="md"/>
+                        <Button type="submit" name="업로드 하기" size="md"/>
                     </div>
                 </form>
 
