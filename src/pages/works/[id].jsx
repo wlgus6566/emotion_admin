@@ -21,7 +21,7 @@ export default function WorksDetail() {
         setProjectCount(countArr)
     }, [projectCount])
 
-    const deleteItem = useCallback((index) => {
+    const deleteItem = useCallback((e,index) => {
         setProjectCount([].concat(projectCount).splice(index, 1));
     },[projectCount])
 
@@ -213,8 +213,12 @@ export default function WorksDetail() {
     });
 
 
-    const handleFormChange = (val, name) => {
-        setFormData({...formData, [name]: val })
+    const handleFormChange = (val, depth1, depth2) => {
+        if(depth2) {
+            setFormData({...formData, [depth1]: {...formData[depth1],[depth2]: val} })
+            return
+        }
+        setFormData({...formData, [depth1]: val })
     };
 
     const makeFormData = (val, name) => {
@@ -315,7 +319,7 @@ export default function WorksDetail() {
                     <div className="mt-6">
                         <FormFile
                             value={formData.kvPCBigImg}
-                            onChange={(e) => handleFormChange(e, 'kvPCBigImg')}
+                            onChange={(e) => handleFormChange(e, 'keyVisualBigImageFile', 'pcImage')}
                             multiple={false}
                             label="KV PC BIG 이미지"
                         />
@@ -323,7 +327,7 @@ export default function WorksDetail() {
                     <div className="mt-6">
                         <FormFile
                             value={formData.kvMOBigImg}
-                            onChange={(e) => handleFormChange(e, 'kvMOBigImg')}
+                            onChange={(e) => handleFormChange(e, 'keyVisualBigImageFile','moImage')}
                             multiple={false}
                             label="KV MO BIG 이미지"
                         />
@@ -374,18 +378,20 @@ export default function WorksDetail() {
 
                     {/* -----프로젝트 상세----- */}
 
-                    <div className="my-20 p-10 border-y-2 border-y-black">
+                    <div className="my-20 p-4 border-y-2 border-y-black">
                         <h4 className="text-lg font-semibold">프로젝트 상세</h4>
 
                         {projectCount && projectCount.map((item, index) => (
-                            <div key={index} className="p-10 my-4 border-y-2 border-y-gray">
-                                    <div className="flex justify-end">
+                            <div key={index} className="py-10 my-4 border-y-2 border-y-gray">
+                                {
+                                    index >= 1 && <div className="flex justify-end">
                                         <Button
-                                            onClick={(index) => deleteItem(index)}
+                                            onClick={(e,index) => deleteItem(e,index)}
                                             type="button"
                                             size='sm'
                                             name={`삭제${index}`}/>
                                     </div>
+                                }
 
                                 <div className="grid gap-6 mb-6 grid-cols-2">
                                     <FormInput

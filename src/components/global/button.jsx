@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export default function Button({name, size, type, onClick = () => {},}) {
+export default function Button({name, size, type, onClick = () => {e},}) {
     return (
         <>
             {size === 'lg' &&

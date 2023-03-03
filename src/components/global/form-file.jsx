@@ -58,6 +58,8 @@ export default function FormFile(
                 required={required}
                 multiple={multiple}
                 onChange={handleChange} />
+            {
+                files.length > 1 &&
                 <ul className="flex flex-wrap gap-3">
                     {files.map((file, index) => (
                         <li key={`${file.fileName}_${index}`}
@@ -76,6 +78,7 @@ export default function FormFile(
                         </li>
                     ))}
                 </ul>
+            }
         </div>
     );
 }
