@@ -6,12 +6,41 @@ import FormDatepicker from "@/components/global/form-datepicker";
 import FormFile from "@/components/global/form-file";
 import Button from "@/components/global/button";
 import FormCheckboxGroup from "@/components/global/form-checkbox-group";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
 import FormSelect from "@/components/global/form-select";
+import { faMinus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {array} from "prop-types";
 
 export default function WorksDetail() {
 
+
+
     const [projectCount, setProjectCount] = useState([0])
+    const [awardList, setAwardList] = useState([
+        {
+            "awardPrize": "",
+            "awardSeq": ""
+        }
+    ])
+
+    const onAddAwardDiv = useCallback(() => {
+        const countArr = [...awardList,       {
+            "awardPrize": "",
+            "awardSeq": ""
+        }]
+        setAwardList(countArr)
+
+    }, [awardList])
+
+    const onDeleteAwardDiv = useCallback((index) => {
+        const findIndex = awardList.findIndex((el,idx) => idx === index)
+        let arr = [...awardList]
+        arr.splice(findIndex, 1)
+        setAwardList(arr)
+    },[awardList])
+
+
 
     const onAddDetailDiv = useCallback(() => {
         const countArr = [...projectCount]
@@ -22,8 +51,10 @@ export default function WorksDetail() {
     }, [projectCount])
 
     const deleteItem = useCallback((e,index) => {
+        console.log(index)
         setProjectCount([].concat(projectCount).splice(index, 1));
     },[projectCount])
+
 
     const awardOptions = [
         { label: '웨어러블', value: 'option1' },
@@ -112,7 +143,7 @@ export default function WorksDetail() {
       "awardSeq": 11
     }
   ],
-  "fieldList":
+  "fieldList": [
     {
       "backgroundColor": "#000",
       "contents": "고객 관점에서 불필요한 단계를 줄이고 온라인에서 손쉽게 <br>가입/개통할",
@@ -144,6 +175,7 @@ export default function WorksDetail() {
         "pcImagePhysicalName": "/upload/WORKS/PC/2017/T-pay/01_overview_bg.png"
       }
     },
+   ],
   "interview": {
     "pcImage": {
       "fileName": "image.png",
@@ -186,12 +218,21 @@ export default function WorksDetail() {
         useYn: 'Y',
         sortingOrder: 1,
         keyVisualBigImageFile: {
-            pcImage: {
-            },
-            moImage: {
-            },
+            pcImage: {},
+            moImage: {},
             keyVisualType: "KVT_DETAIL"
         },
+        keyVisualSmallImageFile: {
+            pcImage: {},
+            moImage: {},
+            keyVisualType: "KVT_DETAIL"
+        },
+        awardList: [
+            {
+                "awardPrize": "",
+                "awardSeq": "",
+            }
+        ],
         kvPCBigImg: [],
         kvMOBigImg: [],
         kvPCSmallImg: [],
@@ -213,17 +254,13 @@ export default function WorksDetail() {
     });
 
 
-    const handleFormChange = (val, depth1, depth2) => {
+    const handleFormChange = useCallback((val, depth1, depth2, index) => {
         if(depth2) {
-            setFormData({...formData, [depth1]: {...formData[depth1],[depth2]: val} })
+            setFormData({...formData, [depth1]: {...formData[depth1], [depth2]: val}})
             return
         }
         setFormData({...formData, [depth1]: val })
-    };
-
-    const makeFormData = (val, name) => {
-        setFormData({...formData, [name]: val })
-    };
+    }, [formData]);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -335,7 +372,7 @@ export default function WorksDetail() {
                     <div className="mt-6">
                         <FormFile
                             value={formData.kvPCSmallImg}
-                            onChange={(e) => handleFormChange(e, 'kvPCSmallImg')}
+                            onChange={(e) => handleFormChange(e, 'keyVisualSmallImageFile','pcImage')}
                             multiple={false}
                             label="KV PC SMALL 이미지"
                         />
@@ -343,7 +380,7 @@ export default function WorksDetail() {
                     <div className="mt-6">
                         <FormFile
                             value={formData.kvPCDetailImg}
-                            onChange={(e) => handleFormChange(e, 'kvPCDetailImg')}
+                            onChange={(e) => handleFormChange(e, 'keyVisualSmallImageFile','moImage')}
                             multiple={false}
                             label="KV PC DETAIL 이미지"
                         />
@@ -359,18 +396,40 @@ export default function WorksDetail() {
                     <div className="my-20">
                         <h4 className="text-lg font-semibold">어워드</h4>
                         <div className="border-y-2 border-y-black p-4 my-4">
-                            <div className="grid gap-6 mb-6 grid-cols-2">
-                                <FormSelect
-                                    name="award_list"
-                                    onChange={(e) => handleFormChange(e, 'awardList')}
-                                    options={awardOptions}
-                                    label="어워드"
-                                />
-                                <FormInput
-                                    name="award_txt"
-                                    placeholder="어워드 상세"
-                                    label="어워드 상세"
-                                />
+                            {awardList && awardList.map((item, index)=> (
+                                    <div key={index} className="grid gap-6 mb-6 grid-cols-[5fr,5fr,1fr]">
+                                        <FormSelect
+                                            name="award_list"
+                                            onChange={(value) => handleFormChange(value, 'awardList', [], index )}
+                                            options={awardOptions}
+                                            label="어워드"
+                                        />
+                                        <FormInput
+                                            name="award_txt"
+                                            placeholder="어워드 상세"
+                                            label="어워드 상세"
+                                        />
+                                        <button
+                                            className=""
+                                            onClick={() => onDeleteAwardDiv(index)}
+                                            type="button"
+                                        >
+                                            <FontAwesomeIcon icon={faMinus} />
+                                        </button>
+                                    </div>
+                                ))
+                            }
+                            <div className="flex items-end w-50 h-50 mb-3">
+                                <div>
+                                    <Button onClick={onAddAwardDiv} type="button" size='sm' name="추가"/>
+                                </div>
+                              {/*  <button
+                                    className=""
+                                    onClick={() => onAddAwardDiv()}
+                                    type="button"
+                                >
+                                    <FontAwesomeIcon icon={faPlus} />
+                                </button>*/}
                             </div>
                         </div>
 
