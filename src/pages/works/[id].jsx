@@ -24,22 +24,21 @@ export default function WorksDetail() {
         }
     ])
 
-    const onAddAwardDiv = useCallback(() => {
-        const countArr = [...awardList,       {
-            "awardPrize": "",
-            "awardSeq": ""
-        }]
-        setAwardList(countArr)
-
+    const onAddOrDeleteAward = useCallback((index) => {
+        if(index) {
+            const findIndex = awardList.findIndex((el,idx) => idx === index)
+            console.log(findIndex)
+            let arr = [...awardList]
+            arr.splice(findIndex, 1)
+            setAwardList(arr)
+        } else {
+            const countArr = [...awardList,       {
+                "awardPrize": "",
+                "awardSeq": ""
+            }]
+            setAwardList(countArr)
+        }
     }, [awardList])
-
-    const onDeleteAwardDiv = useCallback((index) => {
-        const findIndex = awardList.findIndex((el,idx) => idx === index)
-        let arr = [...awardList]
-        arr.splice(findIndex, 1)
-        setAwardList(arr)
-    },[awardList])
-
 
 
     const onAddDetailDiv = useCallback(() => {
@@ -409,19 +408,22 @@ export default function WorksDetail() {
                                             placeholder="어워드 상세"
                                             label="어워드 상세"
                                         />
-                                        <button
-                                            className=""
-                                            onClick={() => onDeleteAwardDiv(index)}
-                                            type="button"
-                                        >
-                                            <FontAwesomeIcon icon={faMinus} />
-                                        </button>
+                                        {
+                                            index >= 1 &&
+                                            <button
+                                                className=""
+                                                onClick={() => onAddOrDeleteAward(index)}
+                                                type="button"
+                                            >
+                                                <FontAwesomeIcon icon={faMinus} />
+                                            </button>
+                                        }
                                     </div>
                                 ))
                             }
                             <div className="flex items-end w-50 h-50 mb-3">
                                 <div>
-                                    <Button onClick={onAddAwardDiv} type="button" size='sm' name="추가"/>
+                                    <Button onClick={() => onAddOrDeleteAward()} type="button" size='sm' name="추가"/>
                                 </div>
                               {/*  <button
                                     className=""
