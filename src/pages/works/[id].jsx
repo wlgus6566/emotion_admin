@@ -22,18 +22,13 @@ export default function WorksDetail() {
     ])
 
 
-    const handleAwardChange = useCallback((val, depth1, index) => {
-        console.log(val, depth1, index)
-        let aa = [...formData.awardList];
-  /*      aa[index][depth1] = val;
-        console.log(aa);
-        setFormData({...formData, ['awardList']: aa})*/
-     /*   setFormData((prevFormData) => {
-            const newWardList = [...prevFormData.awardList, {[awardList[index]['awardSeq']]: val }];
-            const newFormData = { ...prevFormData, awardList: newWardList };
-            return newFormData;
-        });*/
-    }, []);
+    const handleAwardChange = (val, depth1, index) => {
+        if(val) {
+            let aa = [...formData.awardList];
+            aa[index][depth1] = val;
+            setFormData( { ...formData, awardList: aa})
+        }
+    }
 
     const onAddOrDeleteAward = (index) => {
         if(index) {
