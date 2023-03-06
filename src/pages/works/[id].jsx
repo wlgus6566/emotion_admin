@@ -92,6 +92,7 @@ export default function WorksDetail() {
             const findIndex = formData[keyName].findIndex((el,idx) => idx === index)
             let arr = [...formData[keyName]]
             arr.splice(findIndex, 1)
+            console.log(arr)
             const newFormData = { ...formData, [keyName]: arr };
             setFormData(newFormData)
         } else { //add
@@ -264,13 +265,13 @@ export default function WorksDetail() {
 
 
 
-    const handleFormChange = useCallback((val, depth1, depth2) => {
+    const handleFormChange = (val, depth1, depth2) => {
         if(depth2) {
             setFormData({...formData, [depth1]: {...formData[depth1], [depth2]: val}})
             return
         }
         setFormData({...formData, [depth1]: val})
-    }, [formData]);
+    };
 
 
 
@@ -399,7 +400,7 @@ export default function WorksDetail() {
                                             label="어워드 상세"
                                         />
                                         {
-                                            (index === formData.awardList.length - 1 && index !== 0) &&
+                                            (/*index === formData.awardList.length - 1 && */index !== 0) &&
                                             <button
                                                 className="border rounded-full w-8 h-8 mt-8"
                                                 onClick={() => onAddOrDelete('awardList', index)}
@@ -556,7 +557,7 @@ export default function WorksDetail() {
                                             label="이름"
                                             />
                                         {
-                                            (index === formData.creditList.length - 1 && index !== 0) &&
+                                            (/*index === formData.creditList.length - 1 &&*/ index !== 0) &&
                                             <button
                                                 className="border rounded-full w-8 h-8 mt-8"
                                                 onClick={() => onAddOrDelete('creditList', index)}
