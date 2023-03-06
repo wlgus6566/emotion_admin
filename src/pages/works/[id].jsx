@@ -6,22 +6,85 @@ import FormDatepicker from "@/components/global/form-datepicker";
 import FormFile from "@/components/global/form-file";
 import Button from "@/components/global/button";
 import FormCheckboxGroup from "@/components/global/form-checkbox-group";
-import {useCallback, useEffect, useState} from "react";
+import {useCallback, useState} from "react";
 import FormSelect from "@/components/global/form-select";
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {array} from "prop-types";
 
 export default function WorksDetail() {
     const [projectCount, setProjectCount] = useState([0])
-    const [awardList, setAwardList] = useState([
-        {
-            "awardPrize": "",
-            "awardSeq": ""
-        }
-    ])
-
-
+    const awardOptions = [
+        { label: '웨어러블', value: 'option1' },
+        { label: '모바일 앱', value: 'option2' },
+        { label: '모바일 웹', value: 'option3' },
+        { label: 'PC 웹', value: 'option4' },
+        { label: '유지/운영', value: 'option5' },
+        { label: '리뉴얼', value: 'option6' },
+        { label: '신규구축', value: 'option7' },
+        { label: '컨설팅', value: 'option8' },
+        { label: '태블릿 앱', value: 'option9' },
+        { label: '기타', value: 'option10' },
+    ];
+    const [formData, setFormData] = useState({
+        clientName: '', //클라이언트명
+        launchingDt: new(Date),
+        projectName: '', //프로젝트 타이틀
+        projectTypeCode: [],
+        serviceName: '', //프로젝트명
+        listFontColor: '',
+        detailFontColor: '',
+        useYn: 'Y',
+        sortingOrder: 1,
+        keyVisualBigImageFile: {
+            pcImage: {},
+            moImage: {},
+            keyVisualType: "KVT_DETAIL"
+        },
+        keyVisualSmallImageFile: {
+            pcImage: {},
+            moImage: {},
+            keyVisualType: "KVT_DETAIL"
+        },
+        awardList: [
+            {
+                "awardPrize": "",
+                "awardSeq": "",
+            }
+        ],
+        fieldList: [
+            {
+                backgroundColor: "",
+                contents: "",
+                fieldTypeCode: "",
+                fontColor: "",
+                titleOne: "",
+                titleTwo: "",
+                youtubeUrl: "",
+                fieldImageFile: {
+                    pcImage: {},
+                    moImage: {},
+                }
+            },
+        ],
+        kvPCBigImg: [],
+        kvMOBigImg: [],
+        kvPCSmallImg: [],
+        kvPCDetailImg: [],
+        kvMODetailImg: [],
+        awardOptions: [],
+        projectDetailTitle1: '',
+        projectDetailTitle2: '',
+        projectDetailContents: '',
+        interviewContents: '',
+        interviewPCImg: '',
+        interviewMOImg: '',
+        creditList: [
+            {
+                name: '',
+                position: ''
+            }
+        ]
+    });
     const handleAwardChange = (val, depth1, index) => {
         if(val) {
             let aa = [...formData.awardList];
@@ -44,39 +107,42 @@ export default function WorksDetail() {
                 "awardSeq": ""
             }
             awardArr.push(award)
-            const newFormData = { ...formData, awardList: awardArr };
-            console.log(newFormData)
-            setFormData(newFormData)
+            setFormData({ ...formData, awardList: awardArr })
         }
     }
 
 
-    const onAddDetailDiv = useCallback(() => {
-        const countArr = [...projectCount]
-        let counter = countArr.slice(-1)[0]
-        counter += 1
-        countArr.push(counter)
-        setProjectCount(countArr)
-    }, [projectCount])
+    const onAddOrDeleteField = (index) => {
+        if(index) {
+            const findIndex = formData.fieldList.findIndex((el,idx) => idx === index)
+            let arr = [...formData.fieldList]
+            arr.splice(findIndex, 1)
+            setFormData({ ...formData, fieldList: arr })
+        } else {
+            const fieldArr = [...formData.fieldList]
+            const arr = {
+                backgroundColor: "",
+                contents: "",
+                fieldTypeCode: "",
+                fontColor: "",
+                titleOne: "",
+                titleTwo: "",
+                youtubeUrl: "",
+                fieldImageFile: {
+                    pcImage: {},
+                    moImage: {},
+                }
+            }
+            fieldArr.push(arr);
+            setFormData({ ...formData, fieldList: fieldArr })
+        }
+    }
 
     const deleteItem = useCallback((e,index) => {
         console.log(index)
         setProjectCount([].concat(projectCount).splice(index, 1));
     },[projectCount])
 
-
-    const awardOptions = [
-        { label: '웨어러블', value: 'option1' },
-        { label: '모바일 앱', value: 'option2' },
-        { label: '모바일 웹', value: 'option3' },
-        { label: 'PC 웹', value: 'option4' },
-        { label: '유지/운영', value: 'option5' },
-        { label: '리뉴얼', value: 'option6' },
-        { label: '신규구축', value: 'option7' },
-        { label: '컨설팅', value: 'option8' },
-        { label: '태블릿 앱', value: 'option9' },
-        { label: '기타', value: 'option10' },
-    ];
 
     /*
     * {
@@ -178,10 +244,6 @@ export default function WorksDetail() {
           "delYn": false,
           "fileSeq": 1
         },
-        "moImageFileName": "01_overview_bg.png",
-        "moImagePhysicalName": "/upload/WORKS/MO/2017/T-pay/01_overview_bg.png",
-        "pcImageFileName": "01_overview_bg.png",
-        "pcImagePhysicalName": "/upload/WORKS/PC/2017/T-pay/01_overview_bg.png"
       }
     },
    ],
@@ -216,51 +278,7 @@ export default function WorksDetail() {
   ]
 }*/
 
-    const [formData, setFormData] = useState({
-        clientName: '', //클라이언트명
-        launchingDt: new(Date),
-        projectName: '', //프로젝트 타이틀
-        projectTypeCode: [],
-        serviceName: '', //프로젝트명
-        listFontColor: '',
-        detailFontColor: '',
-        useYn: 'Y',
-        sortingOrder: 1,
-        keyVisualBigImageFile: {
-            pcImage: {},
-            moImage: {},
-            keyVisualType: "KVT_DETAIL"
-        },
-        keyVisualSmallImageFile: {
-            pcImage: {},
-            moImage: {},
-            keyVisualType: "KVT_DETAIL"
-        },
-        awardList: [
-            {
-                "awardPrize": "dsdds",
-                "awardSeq": "",
-            }
-        ],
-        kvPCBigImg: [],
-        kvMOBigImg: [],
-        kvPCSmallImg: [],
-        kvPCDetailImg: [],
-        kvMODetailImg: [],
-        awardOptions: [],
-        projectDetailTitle1: '',
-        projectDetailTitle2: '',
-        projectDetailContents: '',
-        interviewContents: '',
-        interviewPCImg: '',
-        interviewMOImg: '',
-        creditList: [
-            {
-                name: '',
-                position: ''
-            }
-        ]
-    });
+
 
 
     const handleFormChange = useCallback((val, depth1, depth2) => {
@@ -276,27 +294,7 @@ export default function WorksDetail() {
     const handleSubmit = (event) => {
         event.preventDefault();
         console.log(formData);
-        //resetForm()
     };
-    const resetForm = () => {
-        setFormData({
-            pcTitle: '',
-            moTitle: '',
-            desc: '',
-            contentsImgFiles: [],
-            contentsHtml: '',
-            department: '',
-            date: new Date(),
-            position: '',
-            writer: '',
-            pcIndexImg: [],
-            moIndexThumbImg: [],
-            pcBodyImg: [],
-            moBodyImg: [],
-            pcWriterImg: [],
-            moWriterImg: [],
-        });
-    }
 
     return (
         <div>
@@ -455,12 +453,12 @@ export default function WorksDetail() {
                     <div className="my-20 p-4 border-y-2 border-y-black">
                         <h4 className="text-lg font-semibold">프로젝트 상세</h4>
 
-                        {projectCount && projectCount.map((item, index) => (
+                        {formData.fieldList && formData.fieldList.map((item, index) => (
                             <div key={index} className="py-10 my-4 border-y-2 border-y-gray">
                                 {
                                     index >= 1 && <div className="flex justify-end">
                                         <Button
-                                            onClick={(e,index) => deleteItem(e,index)}
+                                            onClick={(e) => onAddOrDeleteField(e,index)}
                                             type="button"
                                             size='sm'
                                             name={`삭제${index}`}/>
@@ -469,12 +467,13 @@ export default function WorksDetail() {
 
                                 <div className="grid gap-6 mb-6 grid-cols-2">
                                     <FormInput
-                                        name="project_title1"
+                                        name="titleOne"
+                                        onChange={(e) => handleFormChange(e, 'titleOne')}
                                         placeholder="타이틀1"
                                         label="타이틀1"
                                     />
                                     <FormInput
-                                        name="project_title2"
+                                        name="titleTwo"
                                         placeholder="타이틀2"
                                         label="타이틀2"
                                     />
@@ -482,15 +481,29 @@ export default function WorksDetail() {
                                 <div className="mt-6">
                                     <FormTextarea
                                         name="contents"
+                                        onChange={(e) => handleFormChange(e, 'contents')}
                                         placeholder="본문을 입력하세요."
                                         label="본문"/>
                                 </div>
                                 <div className="grid gap-6 mt-6 md:grid-cols-2">
-                                    <FormInput name="font_color" placeholder="폰트색상" label="폰트색상"/>
-                                    <FormInput name="bg_color" placeholder="배경색상" label="배경색상"/>
+                                    <FormInput
+                                        name="fontColor"
+                                        onChange={(e) => handleFormChange(e, 'fontColor')}
+                                        placeholder="폰트색상"
+                                        label="폰트색상"/>
+                                    <FormInput
+                                        name="backgroundColor"
+                                        onChange={(e) => handleFormChange(e, 'backgroundColor')}
+                                        placeholder="배경색상"
+                                        label="배경색상"/>
                                 </div>
                                 <div className="mt-6">
-                                    <FormInput name="pc_title" placeholder="유튜브 URL" label="유튜브 URL"/>
+                                    <FormInput
+                                        name="youtubeUrl"
+                                        onChange={(e) => handleFormChange(e, 'youtubeUrl')}
+                                        placeholder="유튜브 URL"
+                                        label="유튜브 URL"
+                                    />
                                 </div>
                                 <div className="mt-6">
                                     <FormFile
@@ -501,7 +514,7 @@ export default function WorksDetail() {
                         ))}
 
                         <div>
-                            <Button onClick={onAddDetailDiv} type="button" size='sm' name="추가"/>
+                            <Button onClick={() => onAddOrDeleteField()} type="button" size='sm' name="추가"/>
                         </div>
                     </div>
                     {/* //----프로젝트 상세---- */}
