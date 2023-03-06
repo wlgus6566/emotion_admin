@@ -75,18 +75,139 @@ export default function WorksDetail() {
             }
         ]
     });
-    const handleArrayChange = (val, depth1, depth2, index, depth3) => {
-        if(val) {
-            if(depth3) {
-                [...formData[depth1]][index][depth2] = {...formData[depth1][index][depth2],[depth3]: val[0]};
-                setFormData( { ...formData})
-                return
-            }
-            [...formData[depth1]][index][depth2] = val;
-            setFormData( { ...formData})
-        }
-    }
-
+    /*
+       * {
+     "clientName": "SK텔레콤",
+     "launchingDt": 23.01,
+     "serviceName": "다양한 신규 서비스로 새로워진",
+     "projectTypeCode": "PJT_CONSTRUCTION",
+     "serviceName": "T 다이렉트샵",
+     "listFontColor": "#fff",
+     "detailFontColor": "#fff",
+     "useYn": "Y",
+     "sortingOrder": 1,
+     "keyVisualBigImageFile": {
+       "pcImage": {
+         "fileName": "image.png",
+         "fileSize": 77738,
+         "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+         "fileExtensionName": "image/jpeg",
+         "delYn": false,
+         "fileSeq": 1
+       },
+       "moImage": {
+         "fileName": "image.png",
+         "fileSize": 77738,
+         "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+         "fileExtensionName": "image/jpeg",
+         "delYn": false,
+         "fileSeq": 1
+       },
+       "keyVisualType": "KVT_DETAIL"
+     },
+     "keyVisualSmallImageFile": {
+       "pcImage": {
+         "fileName": "image.png",
+         "fileSize": 77738,
+         "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+         "fileExtensionName": "image/jpeg",
+         "delYn": false,
+         "fileSeq": 1
+       },
+       "moImage": {
+         "fileName": "image.png",
+         "fileSize": 77738,
+         "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+         "fileExtensionName": "image/jpeg",
+         "delYn": false,
+         "fileSeq": 1
+       },
+       "keyVisualType": "KVT_DETAIL"
+     },
+     "keyVisualDetailImageFile": {
+       "pcImage": {
+         "fileName": "image.png",
+         "fileSize": 77738,
+         "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+         "fileExtensionName": "image/jpeg",
+         "delYn": false,
+         "fileSeq": 1
+       },
+       "moImage": {
+         "fileName": "image.png",
+         "fileSize": 77738,
+         "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+         "fileExtensionName": "image/jpeg",
+         "delYn": false,
+         "fileSeq": 1
+       },
+       "keyVisualType": "KVT_DETAIL"
+     },
+     "awardList": [
+       {
+         "awardPrize": "스마트앱어워드 코리아 2021 브랜드쇼핑몰 분야 대상",
+         "awardSeq": 11
+       }
+     ],
+     "fieldList": [
+       {
+         "backgroundColor": "#000",
+         "contents": "고객 관점에서 불필요한 단계를 줄이고 온라인에서 손쉽게 <br>가입/개통할",
+         "fieldTypeCode": "FDT_DESIGN",
+         "fontColor": "#fff",
+         "titleOne": "쉽고 빠르게 결제와 할인까지!",
+         "titleTwo": "쉽고 빠르게 결제와 할인까지!",
+         "youtubeUrl": "http://www.example.co.kr",
+         "fieldImageFile": {
+           "pcImage": {
+             "fileName": "image.png",
+             "fileSize": 77738,
+             "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+             "fileExtensionName": "image/jpeg",
+             "delYn": false,
+             "fileSeq": 1
+           },
+           "moImage": {
+             "fileName": "image.png",
+             "fileSize": 77738,
+             "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+             "fileExtensionName": "image/jpeg",
+             "delYn": false,
+             "fileSeq": 1
+           },
+         }
+       },
+      ],
+     "interview": {
+       "pcImage": {
+         "fileName": "image.png",
+         "fileSize": 77738,
+         "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+         "fileExtensionName": "image/jpeg",
+         "delYn": false,
+         "fileSeq": 1
+       },
+       "moImage": {
+         "fileName": "image.png",
+         "fileSize": 77738,
+         "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
+         "fileExtensionName": "image/jpeg",
+         "delYn": false,
+         "fileSeq": 1
+       },
+       "contents": "서비스 이용 연령층이 학습을 시작하는 초등 저학년부터 자기 주도적인 학습이 가능한 중등까지 넓은 점을 고려하여 다양한 연령층이 재미있고 효과적인 학습을 할 수 있도록 콘텐츠 기획부터 UI디자인까지 많은 아이디어와 고민을 한 프로젝트였습니다.",
+       "moImageFileName": "08_project_interview.jpg",
+       "moImagePhysicalName": "/upload/WORKS/MO/2017/T-pay/08_project_interview.png",
+       "pcImageFileName": "10_project_interview.png",
+       "pcImagePhysicalName": "/upload/WORKS/PC/2017/T-pay/10_project_interview.png"
+     },
+     "creditList": [
+       {
+         "name": "홍길동",
+         "position": "PM"
+       }
+     ]
+   }*/
     const onAddOrDelete = (keyName, index) => {
         if(index) { //delete
             const findIndex = formData[keyName].findIndex((el,idx) => idx === index)
@@ -128,143 +249,6 @@ export default function WorksDetail() {
         }
     }
 
-    /*
-    * {
-  "clientName": "SK텔레콤",
-  "launchingDt": 23.01,
-  "serviceName": "다양한 신규 서비스로 새로워진",
-  "projectTypeCode": "PJT_CONSTRUCTION",
-  "serviceName": "T 다이렉트샵",
-  "listFontColor": "#fff",
-  "detailFontColor": "#fff",
-  "useYn": "Y",
-  "sortingOrder": 1,
-  "keyVisualBigImageFile": {
-    "pcImage": {
-      "fileName": "image.png",
-      "fileSize": 77738,
-      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
-      "fileExtensionName": "image/jpeg",
-      "delYn": false,
-      "fileSeq": 1
-    },
-    "moImage": {
-      "fileName": "image.png",
-      "fileSize": 77738,
-      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
-      "fileExtensionName": "image/jpeg",
-      "delYn": false,
-      "fileSeq": 1
-    },
-    "keyVisualType": "KVT_DETAIL"
-  },
-  "keyVisualSmallImageFile": {
-    "pcImage": {
-      "fileName": "image.png",
-      "fileSize": 77738,
-      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
-      "fileExtensionName": "image/jpeg",
-      "delYn": false,
-      "fileSeq": 1
-    },
-    "moImage": {
-      "fileName": "image.png",
-      "fileSize": 77738,
-      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
-      "fileExtensionName": "image/jpeg",
-      "delYn": false,
-      "fileSeq": 1
-    },
-    "keyVisualType": "KVT_DETAIL"
-  },
-  "keyVisualDetailImageFile": {
-    "pcImage": {
-      "fileName": "image.png",
-      "fileSize": 77738,
-      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
-      "fileExtensionName": "image/jpeg",
-      "delYn": false,
-      "fileSeq": 1
-    },
-    "moImage": {
-      "fileName": "image.png",
-      "fileSize": 77738,
-      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
-      "fileExtensionName": "image/jpeg",
-      "delYn": false,
-      "fileSeq": 1
-    },
-    "keyVisualType": "KVT_DETAIL"
-  },
-  "awardList": [
-    {
-      "awardPrize": "스마트앱어워드 코리아 2021 브랜드쇼핑몰 분야 대상",
-      "awardSeq": 11
-    }
-  ],
-  "fieldList": [
-    {
-      "backgroundColor": "#000",
-      "contents": "고객 관점에서 불필요한 단계를 줄이고 온라인에서 손쉽게 <br>가입/개통할",
-      "fieldTypeCode": "FDT_DESIGN",
-      "fontColor": "#fff",
-      "titleOne": "쉽고 빠르게 결제와 할인까지!",
-      "titleTwo": "쉽고 빠르게 결제와 할인까지!",
-      "youtubeUrl": "http://www.example.co.kr",
-      "fieldImageFile": {
-        "pcImage": {
-          "fileName": "image.png",
-          "fileSize": 77738,
-          "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
-          "fileExtensionName": "image/jpeg",
-          "delYn": false,
-          "fileSeq": 1
-        },
-        "moImage": {
-          "fileName": "image.png",
-          "fileSize": 77738,
-          "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
-          "fileExtensionName": "image/jpeg",
-          "delYn": false,
-          "fileSeq": 1
-        },
-      }
-    },
-   ],
-  "interview": {
-    "pcImage": {
-      "fileName": "image.png",
-      "fileSize": 77738,
-      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
-      "fileExtensionName": "image/jpeg",
-      "delYn": false,
-      "fileSeq": 1
-    },
-    "moImage": {
-      "fileName": "image.png",
-      "fileSize": 77738,
-      "filePath": "/tmp/a2e6aef2-30a3-4e85-af6e-a164f967a904.jpg",
-      "fileExtensionName": "image/jpeg",
-      "delYn": false,
-      "fileSeq": 1
-    },
-    "contents": "서비스 이용 연령층이 학습을 시작하는 초등 저학년부터 자기 주도적인 학습이 가능한 중등까지 넓은 점을 고려하여 다양한 연령층이 재미있고 효과적인 학습을 할 수 있도록 콘텐츠 기획부터 UI디자인까지 많은 아이디어와 고민을 한 프로젝트였습니다.",
-    "moImageFileName": "08_project_interview.jpg",
-    "moImagePhysicalName": "/upload/WORKS/MO/2017/T-pay/08_project_interview.png",
-    "pcImageFileName": "10_project_interview.png",
-    "pcImagePhysicalName": "/upload/WORKS/PC/2017/T-pay/10_project_interview.png"
-  },
-  "creditList": [
-    {
-      "name": "홍길동",
-      "position": "PM"
-    }
-  ]
-}*/
-
-
-
-
     const handleFormChange = (val, depth1, depth2) => {
         if(depth2) {
             setFormData({...formData, [depth1]: {...formData[depth1], [depth2]: val}})
@@ -273,7 +257,17 @@ export default function WorksDetail() {
         setFormData({...formData, [depth1]: val})
     };
 
-
+    const handleArrayChange = (val, depth1, depth2, index, depth3) => {
+        if(val) {
+            if(depth3) {
+                [...formData[depth1]][index][depth2] = {...formData[depth1][index][depth2],[depth3]: val[0]};
+                setFormData( { ...formData})
+                return
+            }
+            [...formData[depth1]][index][depth2] = val;
+            setFormData( { ...formData})
+        }
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
