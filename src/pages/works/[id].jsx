@@ -47,7 +47,7 @@ export default function WorksDetail() {
         awardList: [
             {
                 "awardPrize": "",
-                "awardSeq": "",
+                "awardSeq": 11,
             }
         ],
         fieldList: [
@@ -61,18 +61,13 @@ export default function WorksDetail() {
                 youtubeUrl: "",
                 },
         ],
-        kvPCBigImg: [],
-        kvMOBigImg: [],
-        kvPCSmallImg: [],
-        kvPCDetailImg: [],
-        kvMODetailImg: [],
-        awardOptions: [],
-        projectDetailTitle1: '',
-        projectDetailTitle2: '',
-        projectDetailContents: '',
-        interviewContents: '',
-        interviewPCImg: '',
-        interviewMOImg: '',
+        interview: {
+            pcImage: {
+            },
+            moImage: {
+            },
+            contents: "",
+        },
         creditList: [
             {
                 name: '',
@@ -104,7 +99,7 @@ export default function WorksDetail() {
             if(keyName === 'awardList') {
                 const newArr = {
                     "awardPrize": "",
-                    "awardSeq": ""
+                    "awardSeq": 11,
                 }
                 arr.push(newArr)
             } else if (keyName === 'fieldList') {
@@ -387,21 +382,15 @@ export default function WorksDetail() {
                         <h4 className="text-lg font-semibold">어워드</h4>
                         <div className="border-y-2 border-y-black p-4 my-4">
                             {formData.awardList && formData.awardList.map((item, index)=> (
-                                    <div key={index} className="grid gap-6 mb-6 grid-cols-[10fr,10fr,1fr]">
-                                        <FormSelect
-                                            name="award_list"
-                                            onChange={(value) => handleArrayChange(value, 'awardList','awardPrize', index)}
-                                            options={awardOptions}
-                                            label="어워드"
-                                        />
+                                    <div key={index} className="grid gap-6 mb-6 grid-cols-[10fr,1fr]">
                                         <FormInput
-                                            name="award_txt"
-                                            onChange={(value) => handleArrayChange(value, 'awardList','awardSeq', index)}
+                                            name="awardPrize"
+                                            onChange={(value) => handleArrayChange(value, 'awardList','awardPrize', index)}
                                             placeholder="어워드 상세"
                                             label="어워드 상세"
                                         />
                                         {
-                                            index >= 1 &&
+                                            (index === formData.awardList.length - 1 && index !== 0) &&
                                             <button
                                                 className="border rounded-full w-8 h-8 mt-8"
                                                 onClick={() => onAddOrDelete('awardList', index)}
@@ -517,17 +506,20 @@ export default function WorksDetail() {
                             <div className="mt-6">
                                 <FormTextarea
                                     name="interviewContents"
+                                    onChange={(val) => handleFormChange(val, 'interview', 'contents')}
                                     placeholder="내용"
                                     label="내용"
                                 />
                             </div>
                             <div className="mt-6">
                                 <FormFile
+                                    onChange={(val) => handleFormChange(val[0], 'interview', 'pcImage')}
                                     label="PC 이미지"
                                 />
                             </div>
                             <div className="mt-6">
                                 <FormFile
+                                    onChange={(val) => handleFormChange(val[0], 'interview', 'moImage')}
                                     label="MO 이미지"
                                 />
                             </div>
