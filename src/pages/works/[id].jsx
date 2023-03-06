@@ -12,7 +12,6 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function WorksDetail() {
-    const [projectCount, setProjectCount] = useState([0])
     const awardOptions = [
         { label: '웨어러블', value: 'option1' },
         { label: '모바일 앱', value: 'option2' },
@@ -60,11 +59,7 @@ export default function WorksDetail() {
                 titleOne: "",
                 titleTwo: "",
                 youtubeUrl: "",
-                fieldImageFile: {
-                    pcImage: {},
-                    moImage: {},
-                }
-            },
+                },
         ],
         kvPCBigImg: [],
         kvMOBigImg: [],
@@ -88,17 +83,12 @@ export default function WorksDetail() {
     const handleArrayChange = (val, depth1, depth2, index, depth3) => {
         if(val) {
             if(depth3) {
-                console.log(depth3)
-                let t = {...formData[depth1][depth2], [depth3]: val[0]} // pcImage: []
-                console.log({ ...formData,[depth1]: {...formData[depth1], [depth2]: {...formData[depth1][depth2], t}}})
-/*                setFormData( { ...formData,[depth1]: {...formData[depth1], [depth2]: {...formData[depth1][depth2], [depth3]: val}} })*/
-
-                 /*setFormData()*/
+                [...formData[depth1]][index][depth2] = {...formData[depth1][index][depth2],[depth3]: val[0]};
+                setFormData( { ...formData})
                 return
             }
-            let aa = [...formData[depth1]];
-            aa[index][depth2] = val;
-            setFormData( { ...formData, depth1: aa})
+            [...formData[depth1]][index][depth2] = val;
+            setFormData( { ...formData})
         }
     }
 
@@ -126,10 +116,6 @@ export default function WorksDetail() {
                     titleOne: "",
                     titleTwo: "",
                     youtubeUrl: "",
-                    fieldImageFile: {
-                        pcImage: {},
-                        moImage: {},
-                    }
                 }
                 arr.push(newArr)
             }
@@ -510,6 +496,7 @@ export default function WorksDetail() {
                                     </div>
                                     <div className="mt-6">
                                         <FormFile
+                                            onChange={(value) => handleArrayChange(value,'fieldList', 'fieldImageFIle', index, 'moImage')}
                                             label="MO 이미지"
                                         />
                                     </div>
