@@ -101,21 +101,21 @@ export default function WorksDetail() {
         }
     }*/
 
-    const onAddOrDeleteAward = (index) => {
+    const onAddOrDeleteAward = (keyName, index) => {
         if(index) {
-            const findIndex = formData.awardList.findIndex((el,idx) => idx === index)
-            let arr = [...formData.awardList]
+            const findIndex = formData[keyName].findIndex((el,idx) => idx === index)
+            let arr = [...formData[keyName]]
             arr.splice(findIndex, 1)
-            const newFormData = { ...formData, awardList: arr };
+            const newFormData = { ...formData, [keyName]: arr };
             setFormData(newFormData)
         } else {
-            let awardArr = [...formData.awardList]
+            let awardArr = [...formData[keyName]]
             const award = {
                 "awardPrize": "",
                 "awardSeq": ""
             }
             awardArr.push(award)
-            setFormData({ ...formData, awardList: awardArr })
+            setFormData({ ...formData, [keyName]: awardArr })
         }
     }
 
@@ -341,6 +341,7 @@ export default function WorksDetail() {
                                     value={formData.listFontColor}
                                     onChange={(e) => handleFormChange(e, 'listFontColor')}
                                     name="listFontColor"
+                                    type="color"
                                     placeholder="목록폰트색상"
                                     label="목록폰트색상"
                                 />
@@ -348,6 +349,7 @@ export default function WorksDetail() {
                                     value={formData.detailFontColor}
                                     onChange={(e) => handleFormChange(e, 'detailFontColor')}
                                     name="detailFontColor"
+                                    type="color"
                                     placeholder="상세폰트색상"
                                     label="상세폰트색상"
                                 />
@@ -425,7 +427,7 @@ export default function WorksDetail() {
                                             index >= 1 &&
                                             <button
                                                 className="border rounded-full w-8 h-8 mt-8"
-                                                onClick={() => onAddOrDeleteAward(index)}
+                                                onClick={() => onAddOrDeleteAward('awardList', index)}
                                                 type="button"
                                             >
                                                 <FontAwesomeIcon icon={faMinus} className=""/>
@@ -436,7 +438,7 @@ export default function WorksDetail() {
                             }
                             <div className="flex items-end w-50 h-50 mb-3">
                                 <div>
-                                    <Button onClick={() => onAddOrDeleteAward()} type="button" size='sm' name="추가"/>
+                                    <Button onClick={() => onAddOrDeleteAward('awardList')} type="button" size='sm' name="추가"/>
                                 </div>
                               {/*  <button
                                     className=""
@@ -452,15 +454,15 @@ export default function WorksDetail() {
 
                     {/* -----프로젝트 상세----- */}
 
-                    <div className="my-20 p-4 border-y-2 border-y-black">
+                    <div className="my-20  py-4">
                         <h4 className="text-lg font-semibold">프로젝트 상세</h4>
 
                         {formData.fieldList && formData.fieldList.map((item, index) => (
-                            <div key={index} className="py-10 my-4 border-y-2 border-y-gray">
+                            <div key={index} className="p-4 my-4 border-t-2 border-t-black">
                                 {
                                     index >= 1 && <div className="flex justify-end">
                                         <Button
-                                            onClick={(e) => onAddOrDeleteField(e,index)}
+                                            onClick={() => onAddOrDeleteAward('fieldList',index)}
                                             type="button"
                                             size='sm'
                                             name={`삭제${index}`}/>
@@ -509,15 +511,22 @@ export default function WorksDetail() {
                                     />
                                 </div>
                                 <div className="mt-6">
-                                    <FormFile
-                                        label="필드 이미지"
-                                    />
+                                    <div className="mt-6">
+                                        <FormFile
+                                            label="PC 이미지"
+                                        />
+                                    </div>
+                                    <div className="mt-6">
+                                        <FormFile
+                                            label="MO 이미지"
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         ))}
 
                         <div>
-                            <Button onClick={() => onAddOrDeleteField()} type="button" size='sm' name="추가"/>
+                            <Button onClick={() => onAddOrDeleteAward('fieldList')} type="button" size='sm' name="추가"/>
                         </div>
                     </div>
                     {/* //----프로젝트 상세---- */}
