@@ -113,6 +113,12 @@ export default function WorksDetail() {
                     youtubeUrl: "",
                 }
                 arr.push(newArr)
+            }else if (keyName === 'creditList') {
+                const newArr = {
+                    name: '',
+                    position: ''
+                }
+                arr.push(newArr)
             }
             setFormData({ ...formData, [keyName]: arr })
         }
@@ -505,7 +511,7 @@ export default function WorksDetail() {
                         <div className="border-y-2 border-y-black p-4 my-4">
                             <div className="mt-6">
                                 <FormTextarea
-                                    name="interviewContents"
+                                    name="contents"
                                     onChange={(val) => handleFormChange(val, 'interview', 'contents')}
                                     placeholder="내용"
                                     label="내용"
@@ -531,17 +537,36 @@ export default function WorksDetail() {
                     <div className="my-20">
                         <h4 className="text-lg font-semibold">투입인원</h4>
                         <div className="border-y-2 border-y-black p-4 my-4">
-                            <div className="grid gap-6 mb-6 grid-cols-2">
-                                <FormInput
-                                    name="name"
-                                    onChange={(e) => handleFormChange(e, 'creditList')}
-                                    placeholder="포지션"
-                                    label="포지션"
-                                />
-                                <FormInput name="inputName" placeholder="이름" label="이름"/>
-                            </div>
+                            {formData.creditList && formData.creditList.map((item, index)=> (
+
+                                    <div key={index} className="grid gap-6 mb-6 grid-cols-[10fr,10fr,1fr]">
+                                            <FormInput
+                                            name="name"
+                                            onChange={(val) => handleArrayChange(val,'creditList','name',index)}
+                                            placeholder="포지션"
+                                            label="포지션"
+                                            />
+                                            <FormInput
+                                            name="inputName"
+                                            onChange={(val) => handleArrayChange(val,'creditList','position',index)}
+                                            placeholder="이름"
+                                            label="이름"
+                                            />
+                                        {
+                                            (index === formData.creditList.length - 1 && index !== 0) &&
+                                            <button
+                                                className="border rounded-full w-8 h-8 mt-8"
+                                                onClick={() => onAddOrDelete('creditList', index)}
+                                                type="button"
+                                            >
+                                                <FontAwesomeIcon icon={faMinus} className=""/>
+                                            </button>
+                                        }
+                                    </div>
+                                ))
+                            }
                             <div>
-                                <Button size='sm' name="추가"/>
+                                <Button onClick={() => onAddOrDelete('creditList')} type="button" size='sm' name="추가"/>
                             </div>
                         </div>
 

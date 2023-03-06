@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 const FormInput = ({
                        label,
-                       name,
                        type,
                        disabled,
                        placeholder,
