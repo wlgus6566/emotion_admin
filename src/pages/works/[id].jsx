@@ -88,37 +88,40 @@ export default function WorksDetail() {
     }
 
     const onAddOrDelete = (keyName, index) => {
-        if(index) {
+        if(index) { //delete
             const findIndex = formData[keyName].findIndex((el,idx) => idx === index)
             let arr = [...formData[keyName]]
             arr.splice(findIndex, 1)
             const newFormData = { ...formData, [keyName]: arr };
             setFormData(newFormData)
-        } else {
+        } else { //add
             let arr = [...formData[keyName]]
-            if(keyName === 'awardList') {
-                const newArr = {
-                    "awardPrize": "",
-                    "awardSeq": 11,
-                }
-                arr.push(newArr)
-            } else if (keyName === 'fieldList') {
-                const newArr = {
-                    backgroundColor: "",
-                    contents: "",
-                    fieldTypeCode: "",
-                    fontColor: "",
-                    titleOne: "",
-                    titleTwo: "",
-                    youtubeUrl: "",
-                }
-                arr.push(newArr)
-            }else if (keyName === 'creditList') {
-                const newArr = {
-                    name: '',
-                    position: ''
-                }
-                arr.push(newArr)
+            switch (keyName) {
+                case 'awardList':
+                    arr.push( {
+                        "awardPrize": "",
+                        "awardSeq": 11,
+                    })
+                    break;
+                case 'fieldList':
+                    arr.push({
+                        backgroundColor: "",
+                        contents: "",
+                        fieldTypeCode: "",
+                        fontColor: "",
+                        titleOne: "",
+                        titleTwo: "",
+                        youtubeUrl: "",
+                    })
+                    break;
+                case 'creditList':
+                    arr.push({
+                        name: '',
+                        position: ''
+                    })
+                    break;
+                default:
+                    alert(keyName, "어떤 값인지 파악이 되지 않습니다." );
             }
             setFormData({ ...formData, [keyName]: arr })
         }
