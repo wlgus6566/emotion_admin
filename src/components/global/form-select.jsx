@@ -5,13 +5,17 @@ import FormInput from "@/components/global/form-input";
 const FormSelect =  ({
                          label,
                          options,
-                         onChange,
+                         onChange = () => {},
                          value = "",
                          disabled,
                          required
                     })  => {
 
     const [selected, setSelected] = useState(value);
+    const changeValue = (e) => {
+        e.preventDefault();
+        setSelected(e.target.value)
+    }
     useEffect(() => {
         onChange && onChange(selected)
     }, [selected]);
@@ -21,7 +25,7 @@ const FormSelect =  ({
                 {label} <span className="text-primary ml-1">*</span>
             </label>
             <select id={label}
-                    onChange={(e) => setSelected(e.target.value)}
+                    onChange={(e) => changeValue(e)}
                     defaultValue={selected}
                     disabled={disabled}
                     required={required}

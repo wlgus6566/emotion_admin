@@ -13,9 +13,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {array} from "prop-types";
 
 export default function WorksDetail() {
-
-
-
     const [projectCount, setProjectCount] = useState([0])
     const [awardList, setAwardList] = useState([
         {
@@ -24,21 +21,39 @@ export default function WorksDetail() {
         }
     ])
 
-    const onAddOrDeleteAward = useCallback((index) => {
+
+    const handleAwardChange = useCallback((val, depth1, index) => {
+        console.log(val, depth1, index)
+        let aa = [...formData.awardList];
+  /*      aa[index][depth1] = val;
+        console.log(aa);
+        setFormData({...formData, ['awardList']: aa})*/
+     /*   setFormData((prevFormData) => {
+            const newWardList = [...prevFormData.awardList, {[awardList[index]['awardSeq']]: val }];
+            const newFormData = { ...prevFormData, awardList: newWardList };
+            return newFormData;
+        });*/
+    }, []);
+
+    const onAddOrDeleteAward = (index) => {
         if(index) {
-            const findIndex = awardList.findIndex((el,idx) => idx === index)
-            console.log(findIndex)
-            let arr = [...awardList]
+            const findIndex = formData.awardList.findIndex((el,idx) => idx === index)
+            let arr = [...formData.awardList]
             arr.splice(findIndex, 1)
-            setAwardList(arr)
+            const newFormData = { ...formData, awardList: arr };
+            setFormData(newFormData)
         } else {
-            const countArr = [...awardList,       {
+            let awardArr = [...formData.awardList]
+            const award = {
                 "awardPrize": "",
                 "awardSeq": ""
-            }]
-            setAwardList(countArr)
+            }
+            awardArr.push(award)
+            const newFormData = { ...formData, awardList: awardArr };
+            console.log(newFormData)
+            setFormData(newFormData)
         }
-    }, [awardList])
+    }
 
 
     const onAddDetailDiv = useCallback(() => {
@@ -228,7 +243,7 @@ export default function WorksDetail() {
         },
         awardList: [
             {
-                "awardPrize": "",
+                "awardPrize": "dsdds",
                 "awardSeq": "",
             }
         ],
@@ -253,13 +268,15 @@ export default function WorksDetail() {
     });
 
 
-    const handleFormChange = useCallback((val, depth1, depth2, index) => {
+    const handleFormChange = useCallback((val, depth1, depth2) => {
         if(depth2) {
             setFormData({...formData, [depth1]: {...formData[depth1], [depth2]: val}})
             return
         }
-        setFormData({...formData, [depth1]: val })
+        setFormData({...formData, [depth1]: val})
     }, [formData]);
+
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -395,27 +412,28 @@ export default function WorksDetail() {
                     <div className="my-20">
                         <h4 className="text-lg font-semibold">어워드</h4>
                         <div className="border-y-2 border-y-black p-4 my-4">
-                            {awardList && awardList.map((item, index)=> (
-                                    <div key={index} className="grid gap-6 mb-6 grid-cols-[5fr,5fr,1fr]">
+                            {formData.awardList && formData.awardList.map((item, index)=> (
+                                    <div key={index} className="grid gap-6 mb-6 grid-cols-[10fr,10fr,1fr]">
                                         <FormSelect
                                             name="award_list"
-                                            onChange={(value) => handleFormChange(value, 'awardList', [], index )}
+                                            onChange={(value) => handleAwardChange(value, 'awardPrize', index)}
                                             options={awardOptions}
                                             label="어워드"
                                         />
                                         <FormInput
                                             name="award_txt"
+                                            onChange={(value) => handleAwardChange(value, 'awardSeq', index)}
                                             placeholder="어워드 상세"
                                             label="어워드 상세"
                                         />
                                         {
                                             index >= 1 &&
                                             <button
-                                                className=""
+                                                className="border rounded-full w-8 h-8 mt-8"
                                                 onClick={() => onAddOrDeleteAward(index)}
                                                 type="button"
                                             >
-                                                <FontAwesomeIcon icon={faMinus} />
+                                                <FontAwesomeIcon icon={faMinus} className=""/>
                                             </button>
                                         }
                                     </div>
