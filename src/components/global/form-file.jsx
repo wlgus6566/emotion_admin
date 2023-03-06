@@ -16,7 +16,6 @@ export default function FormFile(
 
     const handleChange = (e) => {
         const files = Array.from(e.target.files);
-        console.log(files)
         const filesData = files.map((el) => {
             return {
                 fileExtensionName: el.type,
@@ -25,7 +24,6 @@ export default function FormFile(
                 fileSize: el.size
             }
         })
-        console.log(filesData)
         setFiles(filesData || []);
     };
     const handleDelete = (index) => {

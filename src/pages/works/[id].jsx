@@ -85,23 +85,24 @@ export default function WorksDetail() {
             }
         ]
     });
-    const handleArrayChange = (val, depth1, depth2, index) => {
+    const handleArrayChange = (val, depth1, depth2, index, depth3) => {
         if(val) {
+            if(depth3) {
+                console.log(depth3)
+                let t = {...formData[depth1][depth2], [depth3]: val[0]} // pcImage: []
+                console.log({ ...formData,[depth1]: {...formData[depth1], [depth2]: {...formData[depth1][depth2], t}}})
+/*                setFormData( { ...formData,[depth1]: {...formData[depth1], [depth2]: {...formData[depth1][depth2], [depth3]: val}} })*/
+
+                 /*setFormData()*/
+                return
+            }
             let aa = [...formData[depth1]];
             aa[index][depth2] = val;
             setFormData( { ...formData, depth1: aa})
         }
     }
 
-/*    const handleArrayChange = (val, depth1, index) => {
-        if(val) {
-            let aa = [...formData.fieldList];
-            aa[index][depth1] = val;
-            setFormData( { ...formData, fieldList: aa})
-        }
-    }*/
-
-    const onAddOrDeleteAward = (keyName, index) => {
+    const onAddOrDelete = (keyName, index) => {
         if(index) {
             const findIndex = formData[keyName].findIndex((el,idx) => idx === index)
             let arr = [...formData[keyName]]
@@ -109,40 +110,30 @@ export default function WorksDetail() {
             const newFormData = { ...formData, [keyName]: arr };
             setFormData(newFormData)
         } else {
-            let awardArr = [...formData[keyName]]
-            const award = {
-                "awardPrize": "",
-                "awardSeq": ""
-            }
-            awardArr.push(award)
-            setFormData({ ...formData, [keyName]: awardArr })
-        }
-    }
-
-
-    const onAddOrDeleteField = (index) => {
-        if(index) {
-            const findIndex = formData.fieldList.findIndex((el,idx) => idx === index)
-            let arr = [...formData.fieldList]
-            arr.splice(findIndex, 1)
-            setFormData({ ...formData, fieldList: arr })
-        } else {
-            const fieldArr = [...formData.fieldList]
-            const arr = {
-                backgroundColor: "",
-                contents: "",
-                fieldTypeCode: "",
-                fontColor: "",
-                titleOne: "",
-                titleTwo: "",
-                youtubeUrl: "",
-                fieldImageFile: {
-                    pcImage: {},
-                    moImage: {},
+            let arr = [...formData[keyName]]
+            if(keyName === 'awardList') {
+                const newArr = {
+                    "awardPrize": "",
+                    "awardSeq": ""
                 }
+                arr.push(newArr)
+            } else if (keyName === 'fieldList') {
+                const newArr = {
+                    backgroundColor: "",
+                    contents: "",
+                    fieldTypeCode: "",
+                    fontColor: "",
+                    titleOne: "",
+                    titleTwo: "",
+                    youtubeUrl: "",
+                    fieldImageFile: {
+                        pcImage: {},
+                        moImage: {},
+                    }
+                }
+                arr.push(newArr)
             }
-            fieldArr.push(arr);
-            setFormData({ ...formData, fieldList: fieldArr })
+            setFormData({ ...formData, [keyName]: arr })
         }
     }
 
@@ -427,7 +418,7 @@ export default function WorksDetail() {
                                             index >= 1 &&
                                             <button
                                                 className="border rounded-full w-8 h-8 mt-8"
-                                                onClick={() => onAddOrDeleteAward('awardList', index)}
+                                                onClick={() => onAddOrDelete('awardList', index)}
                                                 type="button"
                                             >
                                                 <FontAwesomeIcon icon={faMinus} className=""/>
@@ -438,7 +429,7 @@ export default function WorksDetail() {
                             }
                             <div className="flex items-end w-50 h-50 mb-3">
                                 <div>
-                                    <Button onClick={() => onAddOrDeleteAward('awardList')} type="button" size='sm' name="추가"/>
+                                    <Button onClick={() => onAddOrDelete('awardList')} type="button" size='sm' name="추가"/>
                                 </div>
                               {/*  <button
                                     className=""
@@ -462,7 +453,7 @@ export default function WorksDetail() {
                                 {
                                     index >= 1 && <div className="flex justify-end">
                                         <Button
-                                            onClick={() => onAddOrDeleteAward('fieldList',index)}
+                                            onClick={() => onAddOrDelete('fieldList',index)}
                                             type="button"
                                             size='sm'
                                             name={`삭제${index}`}/>
@@ -513,6 +504,7 @@ export default function WorksDetail() {
                                 <div className="mt-6">
                                     <div className="mt-6">
                                         <FormFile
+                                            onChange={(value) => handleArrayChange(value,'fieldList', 'fieldImageFIle', index, 'pcImage')}
                                             label="PC 이미지"
                                         />
                                     </div>
@@ -526,7 +518,7 @@ export default function WorksDetail() {
                         ))}
 
                         <div>
-                            <Button onClick={() => onAddOrDeleteAward('fieldList')} type="button" size='sm' name="추가"/>
+                            <Button onClick={() => onAddOrDelete('fieldList')} type="button" size='sm' name="추가"/>
                         </div>
                     </div>
                     {/* //----프로젝트 상세---- */}
