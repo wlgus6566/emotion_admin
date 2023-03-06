@@ -85,13 +85,21 @@ export default function WorksDetail() {
             }
         ]
     });
-    const handleAwardChange = (val, depth1, index) => {
+    const handleArrayChange = (val, depth1, depth2, index) => {
         if(val) {
-            let aa = [...formData.awardList];
-            aa[index][depth1] = val;
-            setFormData( { ...formData, awardList: aa})
+            let aa = [...formData[depth1]];
+            aa[index][depth2] = val;
+            setFormData( { ...formData, depth1: aa})
         }
     }
+
+/*    const handleArrayChange = (val, depth1, index) => {
+        if(val) {
+            let aa = [...formData.fieldList];
+            aa[index][depth1] = val;
+            setFormData( { ...formData, fieldList: aa})
+        }
+    }*/
 
     const onAddOrDeleteAward = (index) => {
         if(index) {
@@ -137,12 +145,6 @@ export default function WorksDetail() {
             setFormData({ ...formData, fieldList: fieldArr })
         }
     }
-
-    const deleteItem = useCallback((e,index) => {
-        console.log(index)
-        setProjectCount([].concat(projectCount).splice(index, 1));
-    },[projectCount])
-
 
     /*
     * {
@@ -409,13 +411,13 @@ export default function WorksDetail() {
                                     <div key={index} className="grid gap-6 mb-6 grid-cols-[10fr,10fr,1fr]">
                                         <FormSelect
                                             name="award_list"
-                                            onChange={(value) => handleAwardChange(value, 'awardPrize', index)}
+                                            onChange={(value) => handleArrayChange(value, 'awardList','awardPrize', index)}
                                             options={awardOptions}
                                             label="어워드"
                                         />
                                         <FormInput
                                             name="award_txt"
-                                            onChange={(value) => handleAwardChange(value, 'awardSeq', index)}
+                                            onChange={(value) => handleArrayChange(value, 'awardList','awardSeq', index)}
                                             placeholder="어워드 상세"
                                             label="어워드 상세"
                                         />
@@ -468,12 +470,13 @@ export default function WorksDetail() {
                                 <div className="grid gap-6 mb-6 grid-cols-2">
                                     <FormInput
                                         name="titleOne"
-                                        onChange={(e) => handleFormChange(e, 'titleOne')}
+                                        onChange={(value) => handleArrayChange(value,'fieldList', 'titleOne', index)}
                                         placeholder="타이틀1"
                                         label="타이틀1"
                                     />
                                     <FormInput
                                         name="titleTwo"
+                                        onChange={(value) => handleArrayChange(value,'fieldList', 'titleTwo', index)}
                                         placeholder="타이틀2"
                                         label="타이틀2"
                                     />
@@ -481,26 +484,26 @@ export default function WorksDetail() {
                                 <div className="mt-6">
                                     <FormTextarea
                                         name="contents"
-                                        onChange={(e) => handleFormChange(e, 'contents')}
+                                        onChange={(value) => handleArrayChange(value,'fieldList', 'contents', index)}
                                         placeholder="본문을 입력하세요."
                                         label="본문"/>
                                 </div>
                                 <div className="grid gap-6 mt-6 md:grid-cols-2">
                                     <FormInput
                                         name="fontColor"
-                                        onChange={(e) => handleFormChange(e, 'fontColor')}
+                                        onChange={(value) => handleArrayChange(value,'fieldList', 'fontColor', index)}
                                         placeholder="폰트색상"
                                         label="폰트색상"/>
                                     <FormInput
                                         name="backgroundColor"
-                                        onChange={(e) => handleFormChange(e, 'backgroundColor')}
+                                        onChange={(value) => handleArrayChange(value,'fieldList', 'backgroundColor', index)}
                                         placeholder="배경색상"
                                         label="배경색상"/>
                                 </div>
                                 <div className="mt-6">
                                     <FormInput
                                         name="youtubeUrl"
-                                        onChange={(e) => handleFormChange(e, 'youtubeUrl')}
+                                        onChange={(value) => handleArrayChange(value,'fieldList', 'youtubeUrl', index)}
                                         placeholder="유튜브 URL"
                                         label="유튜브 URL"
                                     />
