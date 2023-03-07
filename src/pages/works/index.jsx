@@ -63,7 +63,9 @@ export default function Works({datas}) {
                 </table>
             </div>
             <div className="flex justify-end mt-6 space-x-2">
-                <Button name="글 쓰기" size="md"/>
+                <Link href="/works/write">
+                    <Button name="글 쓰기" size="md"/>
+                </Link>
             </div>
             <PaginationItem/>
         </>

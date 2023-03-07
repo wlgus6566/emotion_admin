@@ -11,7 +11,7 @@ import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormSelect from "@/components/global/form-select";
 
-export default function WorksDetail() {
+export default function WorksWrite() {
     const projectTypeOptions = [
         {
             value: "PJT_WEARABLE",
@@ -91,7 +91,7 @@ export default function WorksDetail() {
                 titleOne: "",
                 titleTwo: "",
                 youtubeUrl: "",
-                },
+            },
         ],
         interview: {
             pcImage: {
@@ -307,6 +307,12 @@ export default function WorksDetail() {
         console.log(formData);
     };
 
+    const handleDateFormat = (val, depth1) => {
+        const year = val.getFullYear().toString().substr(-2);
+        const month = (val.getMonth() + 1).toString().padStart(2, '0');
+        const formattedDate = year + '.' + month;
+        handleFormChange(formattedDate, depth1)
+    }
     return (
         <div>
             <PageTitle title="Works 관리"/>
@@ -318,12 +324,13 @@ export default function WorksDetail() {
                             <div className="grid gap-6 mb-6 grid-cols-[3fr,1fr]">
                                 <FormInput
                                     name="projectName"
-                                    onChange={(e) => handleFormChange(e, 'projectName')}
+                                    onChange={(val) => handleFormChange(val, 'projectName')}
                                     placeholder="프로젝트 타이틀"
                                     label="프로젝트 타이틀"/>
                                 <FormDatepicker
                                     value={formData.launchingDt}
-                                    onChange={(e) => handleFormChange(e, 'launchingDt')}
+                                    onChange={(val) => handleDateFormat(val,'launchingDt')
+                                }
                                     name="launchingDt"
                                     label="릴리즈일자"
                                     placeholderText="릴리즈일자 선택"
@@ -332,7 +339,7 @@ export default function WorksDetail() {
                             <div className="grid gap-6 mb-6 grid-cols-[3fr,1fr]">
                                 <FormInput
                                     value={formData.serviceName}
-                                    onChange={(e) => handleFormChange(e, 'serviceName')}
+                                    onChange={(val) => handleFormChange(val, 'serviceName')}
                                     name="serviceName"
                                     placeholder="프로젝트명"
                                     label="프로젝트명"
@@ -428,32 +435,32 @@ export default function WorksDetail() {
                         <h4 className="text-lg font-semibold">어워드</h4>
                         <div className="border-y-2 border-y-black p-4 my-4">
                             {formData.awardList && formData.awardList.map((item, index)=> (
-                                    <div key={index} className="grid gap-6 mb-6 grid-cols-[10fr,1fr]">
-                                        <FormInput
-                                            name="awardPrize"
-                                            value={item.awardPrize}
-                                            onChange={(value) => handleArrayChange(value, 'awardList','awardPrize', index)}
-                                            placeholder="어워드 상세"
-                                            label="어워드 상세"
-                                        />
-                                        {
-                                            (/*index === formData.awardList.length - 1 && */index !== 0) &&
-                                            <button
-                                                className="border rounded-full w-8 h-8 mt-8"
-                                                onClick={() => onAddOrDelete('awardList', index)}
-                                                type="button"
-                                            >
-                                                <FontAwesomeIcon icon={faMinus} className=""/>{index}
-                                            </button>
-                                        }
-                                    </div>
-                                ))
+                                <div key={index} className="grid gap-6 mb-6 grid-cols-[10fr,1fr]">
+                                    <FormInput
+                                        name="awardPrize"
+                                        value={item.awardPrize}
+                                        onChange={(value) => handleArrayChange(value, 'awardList','awardPrize', index)}
+                                        placeholder="어워드 상세"
+                                        label="어워드 상세"
+                                    />
+                                    {
+                                        (/*index === formData.awardList.length - 1 && */index !== 0) &&
+                                        <button
+                                            className="border rounded-full w-8 h-8 mt-8"
+                                            onClick={() => onAddOrDelete('awardList', index)}
+                                            type="button"
+                                        >
+                                            <FontAwesomeIcon icon={faMinus} className=""/>{index}
+                                        </button>
+                                    }
+                                </div>
+                            ))
                             }
                             <div className="flex items-end w-50 h-50 mb-3">
                                 <div>
                                     <Button onClick={() => onAddOrDelete('awardList')} type="button" size='sm' name="추가"/>
                                 </div>
-                              {/*  <button
+                                {/*  <button
                                     className=""
                                     onClick={() => onAddAwardDiv()}
                                     type="button"
@@ -601,33 +608,33 @@ export default function WorksDetail() {
                         <div className="border-y-2 border-y-black p-4 my-4">
                             {formData.creditList && formData.creditList.map((item, index)=> (
 
-                                    <div key={index} className="grid gap-6 mb-6 grid-cols-[10fr,10fr,1fr]">
-                                            <FormInput
-                                            name="position"
-                                            value={item.position}
-                                            onChange={(val) => handleArrayChange(val,'creditList','position',index)}
-                                            placeholder="포지션"
-                                            label="포지션"
-                                            />
-                                            <FormInput
-                                            name="name"
-                                            value={item.name}
-                                            onChange={(val) => handleArrayChange(val,'creditList','name',index)}
-                                            placeholder="이름"
-                                            label="이름"
-                                            />
-                                        {
-                                            (/*index === formData.creditList.length - 1 &&*/ index !== 0) &&
-                                            <button
-                                                className="border rounded-full w-8 h-8 mt-8"
-                                                onClick={() => onAddOrDelete('creditList', index)}
-                                                type="button"
-                                            >
-                                                <FontAwesomeIcon icon={faMinus} className=""/>
-                                            </button>
-                                        }
-                                    </div>
-                                ))
+                                <div key={index} className="grid gap-6 mb-6 grid-cols-[10fr,10fr,1fr]">
+                                    <FormInput
+                                        name="position"
+                                        value={item.position}
+                                        onChange={(val) => handleArrayChange(val,'creditList','position',index)}
+                                        placeholder="포지션"
+                                        label="포지션"
+                                    />
+                                    <FormInput
+                                        name="name"
+                                        value={item.name}
+                                        onChange={(val) => handleArrayChange(val,'creditList','name',index)}
+                                        placeholder="이름"
+                                        label="이름"
+                                    />
+                                    {
+                                        (/*index === formData.creditList.length - 1 &&*/ index !== 0) &&
+                                        <button
+                                            className="border rounded-full w-8 h-8 mt-8"
+                                            onClick={() => onAddOrDelete('creditList', index)}
+                                            type="button"
+                                        >
+                                            <FontAwesomeIcon icon={faMinus} className=""/>
+                                        </button>
+                                    }
+                                </div>
+                            ))
                             }
                             <div>
                                 <Button onClick={() => onAddOrDelete('creditList')} type="button" size='sm' name="추가"/>
@@ -645,7 +652,7 @@ export default function WorksDetail() {
     );
 }
 
-export const getStaticProps = async (context) => {
+/*export const getStaticProps = async (context) => {
     const { id } = context.params
     const res = await fetch(`https://jsonplaceholder.typicode.com/photos/${id}`)
     const data = await res.json();
@@ -654,8 +661,9 @@ export const getStaticProps = async (context) => {
             data
         }
     }
-}
+}*/
 
+/*
 export const getStaticPaths = async () => {
     const res = await fetch('https://jsonplaceholder.typicode.com/photos?_start=0&_end=10')
     const datas = await res.json();
@@ -671,5 +679,6 @@ export const getStaticPaths = async () => {
         fallback: false //없는 id 입력시 404 에러 출현
     }
 }
+*/
 
-WorksDetail.layout = DefaultsLayout;
+WorksWrite.layout = DefaultsLayout;
