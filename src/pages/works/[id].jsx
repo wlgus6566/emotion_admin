@@ -645,7 +645,7 @@ export default function WorksDetail() {
     );
 }
 
-export const getStaticProps = async (context) => {
+/*export const getStaticProps = async (context) => {
     const { id } = context.params
     const res = await fetch(`https://jsonplaceholder.typicode.com/photos/${id}`)
     const data = await res.json();
@@ -670,6 +670,6 @@ export const getStaticPaths = async () => {
         paths, //생성된 id를 path에 매칭
         fallback: false //없는 id 입력시 404 에러 출현
     }
-}
+}*/
 
 WorksDetail.layout = DefaultsLayout;

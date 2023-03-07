@@ -34,7 +34,10 @@ export default function Magazine({datas}) {
                     </tr>
                     </thead>
                     <tbody>
-                            {datas.map(data =>
+                    <tr>
+                        <td>{JSON.stringify(datas)}</td>
+                    </tr>
+                         {/*   {datas.map(data =>
                                 <tr key={data.id} className="border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <th scope="row"
                                         className="p-6 text-md text-base text-gray-900 whitespace-nowrap dark:text-white">
@@ -60,7 +63,7 @@ export default function Magazine({datas}) {
 
                                     </td>
                                 </tr>
-                            )}
+                            )}*/}
                     </tbody>
                 </table>
             </div>
@@ -74,12 +77,14 @@ export default function Magazine({datas}) {
 
 export const getStaticProps = async () => {
     const res = await axios({
-        url : `https://jsonplaceholder.typicode.com/photos?_start=0&_end=10`,
+        url : `${process.env.BASE_URL}/api/magazine`,
         method: 'GET',
         headers: {
-            "Content-Type": "application/json"
+            "Content-Type": "application/json",
+            "Authorization":"eyJhbGciOiJIUzUxMiJ9.eyJpbmZvIjoiaWxKK0V5WHd6TWRnWEZPR2g0cXIwVHFCc28vTERpNXdTY2w5VFZVd3dLRzVqMTRCcHVjQnRRanAzcnhDMDBFOHdKZW9abGRNOXpBYUlzVUJKdGFVODM3c1FuOGpDL3dHZzFzZ29HblBBYkxOSWdiaGdVb3hsWjRKc0s2R3Z4RktIZUpvRkM0VTNmOXovMnJwZVl3YkNnPT0iLCJzdWIiOiJkbWswQThFQlpvWkVxaFFJcjVXaXR3PT0iLCJpYXQiOjE2NzgxNjgwODUsImV4cCI6MTY3ODE2OTUyNX0.KHWJET4RkBT3ZsDJGMn9bKUcsTLLuDkTY5KhniISAgYaKU8o4q8cLGBNwX1Dxiwqjunv7_TH8UlGj7kAJr5KXA"
         }
     })
+    console.log(res)
     const datas = await res.data;
 
     return {

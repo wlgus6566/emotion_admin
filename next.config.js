@@ -1,7 +1,12 @@
 const nextConfig = {
   reactStrictMode: true,
-/*  images: {
-    domains: ['https://jsonplaceholder.typicode.com/photos'],
+  /*async rewrites() {
+    return [
+      {
+        source:  "/:path*",
+        destination: `${process.env.BASE_URL}/:path*`
+      },
+    ];
   },*/
 }
 

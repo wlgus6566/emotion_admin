@@ -4,6 +4,7 @@ import PageTitle from "@/components/global/page-title";
 import InputSearch from "@/components/global/input-search";
 import Link from "next/link";
 import Button from "@/components/global/button";
+import axios from "axios";
 
 export default function Works({datas}) {
     return (
@@ -83,5 +84,6 @@ export const getStaticProps = async () => {
         revalidate: 20
     }
 }
+
 
 Works.layout = DefaultsLayout;
