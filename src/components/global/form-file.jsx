@@ -25,7 +25,7 @@ export default function FormFile(
                 fileSize: el.size
             }
         })
-        onChange(filesData || []);
+        onChange(e.target.files);
         setFiles(filesData || []);
     };
     const handleDelete = (index) => {

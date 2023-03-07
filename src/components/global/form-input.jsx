@@ -25,12 +25,12 @@ const FormInput = ({
             >
 
                 {label}
-                {(type === 'color' && inputValue ) &&
+                {(type === 'color' && value ) &&
                     <span
-                        style={{ background: `${inputValue}` }}
+                        style={{ background: `${value}` }}
                         className="ml-3 text-white py-1 px-2 rounded-2xl"
                     >
-                        ${inputValue}
+                        ${value}
                     </span>
                 }
                 {required &&  <span className="text-primary ml-1"> *</span>}

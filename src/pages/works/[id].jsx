@@ -468,12 +468,14 @@ export default function WorksDetail() {
                                     <FormInput
                                         name="fontColor"
                                         value={item.fontColor}
+                                        type="color"
                                         onChange={(value) => handleArrayChange(value,'fieldList', 'fontColor', index)}
                                         placeholder="폰트색상"
                                         label="폰트색상"/>
                                     <FormInput
                                         name="backgroundColor"
                                         value={item.backgroundColor}
+                                        type="color"
                                         onChange={(value) => handleArrayChange(value,'fieldList', 'backgroundColor', index)}
                                         placeholder="배경색상"
                                         label="배경색상"/>
@@ -519,6 +521,7 @@ export default function WorksDetail() {
                             <div className="mt-6">
                                 <FormTextarea
                                     name="contents"
+                                    value={formData.interview.contents}
                                     onChange={(val) => handleFormChange(val, 'interview', 'contents')}
                                     placeholder="내용"
                                     label="내용"
@@ -526,12 +529,14 @@ export default function WorksDetail() {
                             </div>
                             <div className="mt-6">
                                 <FormFile
+                                    //value={formData.interview.pcImage}
                                     onChange={(val) => handleFormChange(val[0], 'interview', 'pcImage')}
                                     label="PC 이미지"
                                 />
                             </div>
                             <div className="mt-6">
                                 <FormFile
+                                    //value={formData.interview.moImage}
                                     onChange={(val) => handleFormChange(val[0], 'interview', 'moImage')}
                                     label="MO 이미지"
                                 />
@@ -548,14 +553,16 @@ export default function WorksDetail() {
 
                                     <div key={index} className="grid gap-6 mb-6 grid-cols-[10fr,10fr,1fr]">
                                             <FormInput
-                                            name="name"
-                                            onChange={(val) => handleArrayChange(val,'creditList','name',index)}
+                                            name="position"
+                                            value={item.position}
+                                            onChange={(val) => handleArrayChange(val,'creditList','position',index)}
                                             placeholder="포지션"
                                             label="포지션"
                                             />
                                             <FormInput
-                                            name="inputName"
-                                            onChange={(val) => handleArrayChange(val,'creditList','position',index)}
+                                            name="name"
+                                            value={item.name}
+                                            onChange={(val) => handleArrayChange(val,'creditList','name',index)}
                                             placeholder="이름"
                                             label="이름"
                                             />
