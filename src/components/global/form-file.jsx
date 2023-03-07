@@ -8,6 +8,7 @@ export default function FormFile(
         max,
         multiple,
         required,
+        value,
         onChange = () => {},
     }
 ) {
@@ -24,6 +25,7 @@ export default function FormFile(
                 fileSize: el.size
             }
         })
+        onChange(filesData || []);
         setFiles(filesData || []);
     };
     const handleDelete = (index) => {
@@ -52,6 +54,7 @@ export default function FormFile(
                 className="cursor-pointer bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ribg-gray-800 focus:bordbg-gray-800 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ribg-gray-800 dark:focus:bordbg-gray-800 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-800 file:text-white hover:file:bg-gray-800 "
                 ref={inputRef}
                 type="file"
+                value={value}
                 max={max}
                 required={required}
                 multiple={multiple}

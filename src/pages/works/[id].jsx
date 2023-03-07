@@ -6,8 +6,7 @@ import FormDatepicker from "@/components/global/form-datepicker";
 import FormFile from "@/components/global/form-file";
 import Button from "@/components/global/button";
 import FormCheckboxGroup from "@/components/global/form-checkbox-group";
-import {useCallback, useState} from "react";
-import FormSelect from "@/components/global/form-select";
+import {useState} from "react";
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -211,6 +210,7 @@ export default function WorksDetail() {
     const onAddOrDelete = (keyName, index) => {
         if(index) { //delete
             const findIndex = formData[keyName].findIndex((el,idx) => idx === index)
+            console.log(findIndex)
             let arr = [...formData[keyName]]
             arr.splice(findIndex, 1)
             console.log(arr)
@@ -389,6 +389,7 @@ export default function WorksDetail() {
                                     <div key={index} className="grid gap-6 mb-6 grid-cols-[10fr,1fr]">
                                         <FormInput
                                             name="awardPrize"
+                                            value={item.awardPrize}
                                             onChange={(value) => handleArrayChange(value, 'awardList','awardPrize', index)}
                                             placeholder="어워드 상세"
                                             label="어워드 상세"
@@ -400,7 +401,7 @@ export default function WorksDetail() {
                                                 onClick={() => onAddOrDelete('awardList', index)}
                                                 type="button"
                                             >
-                                                <FontAwesomeIcon icon={faMinus} className=""/>
+                                                <FontAwesomeIcon icon={faMinus} className=""/>{index}
                                             </button>
                                         }
                                     </div>
@@ -442,12 +443,14 @@ export default function WorksDetail() {
                                 <div className="grid gap-6 mb-6 grid-cols-2">
                                     <FormInput
                                         name="titleOne"
+                                        value={item.titleOne}
                                         onChange={(value) => handleArrayChange(value,'fieldList', 'titleOne', index)}
                                         placeholder="타이틀1"
                                         label="타이틀1"
                                     />
                                     <FormInput
                                         name="titleTwo"
+                                        value={item.titleTwo}
                                         onChange={(value) => handleArrayChange(value,'fieldList', 'titleTwo', index)}
                                         placeholder="타이틀2"
                                         label="타이틀2"
@@ -456,6 +459,7 @@ export default function WorksDetail() {
                                 <div className="mt-6">
                                     <FormTextarea
                                         name="contents"
+                                        value={item.contents}
                                         onChange={(value) => handleArrayChange(value,'fieldList', 'contents', index)}
                                         placeholder="본문을 입력하세요."
                                         label="본문"/>
@@ -463,11 +467,13 @@ export default function WorksDetail() {
                                 <div className="grid gap-6 mt-6 md:grid-cols-2">
                                     <FormInput
                                         name="fontColor"
+                                        value={item.fontColor}
                                         onChange={(value) => handleArrayChange(value,'fieldList', 'fontColor', index)}
                                         placeholder="폰트색상"
                                         label="폰트색상"/>
                                     <FormInput
                                         name="backgroundColor"
+                                        value={item.backgroundColor}
                                         onChange={(value) => handleArrayChange(value,'fieldList', 'backgroundColor', index)}
                                         placeholder="배경색상"
                                         label="배경색상"/>
@@ -475,6 +481,7 @@ export default function WorksDetail() {
                                 <div className="mt-6">
                                     <FormInput
                                         name="youtubeUrl"
+                                        value={item.youtubeUrl}
                                         onChange={(value) => handleArrayChange(value,'fieldList', 'youtubeUrl', index)}
                                         placeholder="유튜브 URL"
                                         label="유튜브 URL"
@@ -483,12 +490,14 @@ export default function WorksDetail() {
                                 <div className="mt-6">
                                     <div className="mt-6">
                                         <FormFile
+                                            value={item.fieldImageFile?.pcImage}
                                             onChange={(value) => handleArrayChange(value,'fieldList', 'fieldImageFIle', index, 'pcImage')}
                                             label="PC 이미지"
                                         />
                                     </div>
                                     <div className="mt-6">
                                         <FormFile
+                                            value={item.fieldImageFile?.moImage}
                                             onChange={(value) => handleArrayChange(value,'fieldList', 'fieldImageFIle', index, 'moImage')}
                                             label="MO 이미지"
                                         />
