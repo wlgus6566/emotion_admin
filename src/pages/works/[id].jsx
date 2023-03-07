@@ -9,9 +9,10 @@ import FormCheckboxGroup from "@/components/global/form-checkbox-group";
 import {useState} from "react";
 import { faMinus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import FormSelect from "@/components/global/form-select";
 
 export default function WorksDetail() {
-    const awardOptions = [
+    const projectTypeOptions = [
         { label: '웨어러블', value: 'option1' },
         { label: '모바일 앱', value: 'option2' },
         { label: '모바일 웹', value: 'option3' },
@@ -22,6 +23,12 @@ export default function WorksDetail() {
         { label: '컨설팅', value: 'option8' },
         { label: '태블릿 앱', value: 'option9' },
         { label: '기타', value: 'option10' },
+    ];
+    const fieldTypeOptions = [
+        { label: '디자인', value: 'FDT_DESIGN' },
+        { label: '프로젝트 상세', value: 'FDT_PROJECT_DESC' },
+        { label: '프로젝트 GOAL', value: 'FDT_PROJECT_GOAL' },
+        { label: '프로젝트 INFO', value: 'FDT_PROJECT_INFO' },
     ];
     const [formData, setFormData] = useState({
         clientName: '', //클라이언트명
@@ -333,8 +340,9 @@ export default function WorksDetail() {
 
                             <div className="mb-6">
                                 <FormCheckboxGroup
-                                    checkboxes={awardOptions}
+                                    checkboxes={projectTypeOptions}
                                     label="프로젝트 타입"
+                                    value={formData.projectTypeCode}
                                     onChange={(e) => handleFormChange(e, 'projectTypeCode')}
                                 />
 
@@ -439,8 +447,15 @@ export default function WorksDetail() {
                                             name={`삭제${index}`}/>
                                     </div>
                                 }
-
-                                <div className="grid gap-6 mb-6 grid-cols-2">
+                                <div className="mt-6">
+                                    <FormSelect
+                                        name="fieldTypeCode"
+                                        onChange={(value) => handleArrayChange(value,'fieldList', 'fieldTypeCode', index)}
+                                        options={fieldTypeOptions}
+                                        label="타입 코드"
+                                    />
+                                </div>
+                                <div className="grid gap-6 mb-6 grid-cols-2 mt-6">
                                     <FormInput
                                         name="titleOne"
                                         value={item.titleOne}
